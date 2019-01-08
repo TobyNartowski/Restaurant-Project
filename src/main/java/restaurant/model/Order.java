@@ -1,9 +1,15 @@
 package restaurant.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+@Entity
+@Table(name = "orders")
 public class Order {
 
     public enum Status {
@@ -18,7 +24,7 @@ public class Order {
 
         private String note;
         private Date date;
-        private Employee employee;
+        //private Employee employee;
 
         Status(String note) {
             this.note = note;
@@ -33,7 +39,7 @@ public class Order {
         }
 
         public Employee getEmployee() {
-            return employee;
+            return null;//employee;
         }
     }
 
@@ -45,12 +51,15 @@ public class Order {
         }
     }
 
-    private Map<Product, Integer> productList;
+    @Id
+    @GeneratedValue
+    private Long id;
+    //private Map<Product, Integer> productList;
     private Payment payment;
     private Status status;
-    private List<PurchaseProof> purchaseProof;
-    private Adress deliveryAdress;
-    private Reservation table;
+    //private List<PurchaseProof> purchaseProof;
+    //private Adress deliveryAdress;
+    //private Reservation table;
 
     public Order() {}
 

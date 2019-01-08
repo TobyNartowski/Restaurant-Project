@@ -29,19 +29,19 @@ public class Adress {
         this.id = id;
     }
 
-    public String getMiasto() {
+    public String getCity() {
         return city;
     }
 
-    public void setMiasto(String city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
-    public String getUlica() {
+    public String getStreet() {
         return street;
     }
 
-    public void setUlica(String street) {
+    public void setStreet(String street) {
         this.street = street;
     }
 

@@ -1,17 +1,36 @@
 package restaurant.model;
 
+import javax.persistence.*;
 import java.util.List;
 
-public class Client extends User {
+@Entity
+@Table(name = "client")
+public class Client extends User{
 
-    private List<Order> orderList;
+    @Id
+    @GeneratedValue
+    private Long id;
+    //private List<Order> orderList;
     private String login;
     private String hash;
+    @OneToOne
+    @JoinColumn(name = "id_user")
+    private User user;
+
+    public Client() {}
 
     public Client(String name, String lastName, Adress adress, long phoneNumber, String login, String hash) {
         super(name, lastName, adress, phoneNumber);
         this.login = login;
         this.hash = hash;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<Order> getOrderList() {

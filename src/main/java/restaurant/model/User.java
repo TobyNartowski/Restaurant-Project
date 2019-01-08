@@ -1,9 +1,9 @@
 package restaurant.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-
+@Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -11,8 +11,11 @@ public class User {
     private Long id;
     private String name;
     private String lastName;
-    private Adress adress;
     private long phoneNumber;
+    @OneToOne(mappedBy = "user")
+    private Client client;
+    @OneToOne
+    private Adress adress;
 
     public User() {}
 
