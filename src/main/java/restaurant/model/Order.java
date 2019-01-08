@@ -1,19 +1,15 @@
 package restaurant.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import javax.persistence.*;
+import java.util.*;
+
+// TODO: Translate to english
 
 @Entity
 @Table(name = "orders")
-public class Order {
+public class Order implements Cloneable {
 
     public enum Status {
-        //todo
         ODRZUCONE("Odrzucone"),
         ODEBRANE("Odebrane"),
         PRZEKAZANE_DO_KUCHNI("Przekazane do kuchni"),
@@ -39,32 +35,41 @@ public class Order {
         }
 
         public Employee getEmployee() {
-            return null;//employee;
+            return null; //employee;
         }
     }
 
-    public enum Payment {
-        NIEZREALIZOWANA, ZREALIZOWANA;
-           // todo
-        public boolean zrealizuj() {
-            return false;
-        }
-    }
+    @Transient
+    static private Order instance = new Order();
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //private Map<Product, Integer> productList;
-    private Payment payment;
+    @ElementCollection
+    private Map<Product, Integer> productList = new HashMap<>();
+    private boolean payment = false;
+    @Enumerated(EnumType.STRING)
     private Status status;
     //private List<PurchaseProof> purchaseProof;
-    //private Adress deliveryAdress;
+    //private Address deliveryAddress;
     //private Reservation table;
 
     public Order() {}
 
-    public void addProduct(Product product, int amount) {
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public static Order getPrototype() {
+        return instance;
+    }
+
+    public void addProduct(Product product, int amount) {
+        productList.put(product, amount);
     }
 
     public boolean deleteProduct(int id, int amount) {
@@ -75,11 +80,13 @@ public class Order {
         return status;
     }
 
-    public Payment getPayment() {
+    public boolean getPayment() {
         return payment;
     }
 
-    public void completePayment() { }
+    public void completePayment() {
+        payment = true;
+    }
 
     public void changeStatus(Status status, Employee employee) {
 
@@ -89,7 +96,30 @@ public class Order {
         return null;
     }
 
+    public Map<Product, Integer> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(Map<Product, Integer> productList) {
+        this.productList = productList;
+    }
+
     /*public void rozdzielDowodZakupu(List<Map<Product, Integer>> podzielonaListaProduktow) {
         TODO
     }*/
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Order clonedOrder = (Order) super.clone();
+
+        Map<Product, Integer> copiedProductList = new HashMap<>();
+        if (!instance.getProductList().isEmpty()) {
+            for (Map.Entry<Product, Integer> entry : instance.getProductList().entrySet()) {
+                copiedProductList.put(entry.getKey(), entry.getValue());
+            }
+        }
+        clonedOrder.setProductList(copiedProductList);
+
+        return clonedOrder;
+    }
 }

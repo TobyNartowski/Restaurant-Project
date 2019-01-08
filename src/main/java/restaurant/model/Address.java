@@ -3,19 +3,18 @@ package restaurant.model;
 import javax.persistence.*;
 
 @Entity
-public class Adress {
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idadres")
     private Long id;
     private String city;
     private String street;
     private String number;
 
-    public Adress() {}
+    public Address() {}
 
-    public Adress(String city, String street, String number) {
+    public Address(String city, String street, String number) {
         this.city = city;
         this.street = street;
         this.number = number;

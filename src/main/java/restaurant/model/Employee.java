@@ -1,13 +1,12 @@
 package restaurant.model;
 
-
 public class Employee extends User {
 
     private String rfid;
 
     public Employee() {}
 
-    public Employee(String name, String lastName, Adress adress, long phoneNumber) {
+    public Employee(String name, String lastName, Address adress, long phoneNumber) {
         super(name, lastName, adress, phoneNumber);
     }
 

@@ -12,17 +12,15 @@ public class User {
     private String name;
     private String lastName;
     private long phoneNumber;
-    @OneToOne(mappedBy = "user")
-    private Client client;
     @OneToOne
-    private Adress adress;
+    private Address address;
 
     public User() {}
 
-    public User(String name, String lastName, Adress adress, long phoneNumber) {
+    public User(String name, String lastName, Address address, long phoneNumber) {
         this.name = name;
         this.lastName = lastName;
-        this.adress = adress;
+        this.address = address;
         this.phoneNumber = phoneNumber;
     }
 
@@ -50,12 +48,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Adress getAdress() {
-        return adress;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAdress(Adress adress) {
-        this.adress = adress;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public long getphoneNumber() {

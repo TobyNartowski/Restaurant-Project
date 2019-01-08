@@ -7,7 +7,6 @@ public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idskladnik")
     private Long id;
     private String name;
     private long price;

@@ -1,5 +1,7 @@
 package restaurant.model;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.Date;
 import java.util.Map;
 
@@ -18,6 +20,7 @@ public class PurchaseProof {
     private int NUMER_WYDRUKU;
     private Date data;
     private Map<Product, Integer> listaProduktow;
+    @Enumerated(EnumType.STRING)
     private TypDowoduZakupu typ;
 
     PurchaseProof(Map<Product, Integer> listaProduktow, TypDowoduZakupu typ) {

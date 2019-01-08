@@ -1,10 +1,12 @@
 package restaurant.model;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.List;
 
-
+@Entity
 public class Product {
 
     @Id
@@ -12,11 +14,13 @@ public class Product {
     private Long id;
     private String name;
     private long price;
+    @ElementCollection
     private List<Ingredient> ingredientList;
 
     public Product() {}
 
-    public Product(long price, List<Ingredient> ingredientList) {
+    public Product(String name, long price, List<Ingredient> ingredientList) {
+        this.name = name;
         this.price = price;
         this.ingredientList = ingredientList;
     }

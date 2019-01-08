@@ -5,7 +5,6 @@ import java.util.Date;
 
 public class Reservation {
 
-
     private Long id;
     private int tableNumber;
     private Date date;
