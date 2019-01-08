@@ -1,0 +1,86 @@
+package restaurant.model;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+public class Order {
+
+    public enum Status {
+        //todo
+        ODRZUCONE("Odrzucone"),
+        ODEBRANE("Odebrane"),
+        PRZEKAZANE_DO_KUCHNI("Przekazane do kuchni"),
+        GOTOWE_DO_DOSTARCZENIA("Gotowe do dostarczenia"),
+        W_TRAKCIE_DOSTAWY("W trakcie dostawy"),
+        DOSTARCZONE("Dostarczone"),
+        ZREALIZOWANE("Zrealizowane");
+
+        private String note;
+        private Date date;
+        private Employee employee;
+
+        Status(String note) {
+            this.note = note;
+        }
+
+        public void nextStatus(Employee employee) {
+
+        }
+
+        public Date getDate() {
+            return date;
+        }
+
+        public Employee getEmployee() {
+            return employee;
+        }
+    }
+
+    public enum Payment {
+        NIEZREALIZOWANA, ZREALIZOWANA;
+           // todo
+        public boolean zrealizuj() {
+            return false;
+        }
+    }
+
+    private Map<Product, Integer> productList;
+    private Payment payment;
+    private Status status;
+    private List<PurchaseProof> purchaseProof;
+    private Adress deliveryAdress;
+    private Reservation table;
+
+    public Order() {}
+
+    public void addProduct(Product product, int amount) {
+
+    }
+
+    public boolean deleteProduct(int id, int amount) {
+        return false;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void completePayment() { }
+
+    public void changeStatus(Status status, Employee employee) {
+
+    }
+
+    public List<PurchaseProof> getPurchaseProof() {
+        return null;
+    }
+
+    /*public void rozdzielDowodZakupu(List<Map<Product, Integer>> podzielonaListaProduktow) {
+        TODO
+    }*/
+}
