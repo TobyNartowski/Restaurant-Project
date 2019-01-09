@@ -3,13 +3,12 @@ package restaurant.model;
 import javax.persistence.*;
 import java.util.*;
 
-// TODO: Translate to english
-
 @Entity
 @Table(name = "orders")
 public class Order implements Cloneable {
 
     public enum Status {
+        UTWORZONE("Utworzone"),
         ODRZUCONE("Odrzucone"),
         ODEBRANE("Odebrane"),
         PRZEKAZANE_DO_KUCHNI("Przekazane do kuchni"),
@@ -20,7 +19,7 @@ public class Order implements Cloneable {
 
         private String note;
         private Date date;
-        //private Employee employee;
+//        private Employee employee;
 
         Status(String note) {
             this.note = note;
@@ -34,9 +33,13 @@ public class Order implements Cloneable {
             return date;
         }
 
-        public Employee getEmployee() {
-            return null; //employee;
-        }
+//        public Employee getEmployee() {
+//            return employee;
+//        }
+//
+//        public void setEmployee(Employee employee) {
+//            this.employee = employee;
+//        }
     }
 
     @Transient
@@ -50,11 +53,12 @@ public class Order implements Cloneable {
     private boolean payment = false;
     @Enumerated(EnumType.STRING)
     private Status status;
+    private String note;
     //private List<PurchaseProof> purchaseProof;
     //private Address deliveryAddress;
     //private Reservation table;
 
-    public Order() {}
+    Order() {}
 
     public Long getId() {
         return id;
@@ -89,7 +93,12 @@ public class Order implements Cloneable {
     }
 
     public void changeStatus(Status status, Employee employee) {
+        this.status = status;
+//        this.status.setEmployee(employee);
+    }
 
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public List<PurchaseProof> getPurchaseProof() {
@@ -104,22 +113,20 @@ public class Order implements Cloneable {
         this.productList = productList;
     }
 
-    /*public void rozdzielDowodZakupu(List<Map<Product, Integer>> podzielonaListaProduktow) {
-        TODO
-    }*/
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getNote() {
+        return note;
+    }
 
     @Override
-    public Object clone() throws CloneNotSupportedException {
-        Order clonedOrder = (Order) super.clone();
-
-        Map<Product, Integer> copiedProductList = new HashMap<>();
-        if (!instance.getProductList().isEmpty()) {
-            for (Map.Entry<Product, Integer> entry : instance.getProductList().entrySet()) {
-                copiedProductList.put(entry.getKey(), entry.getValue());
-            }
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder("-- Zamowienie --\n");
+        for (Map.Entry<Product, Integer> entry : productList.entrySet()) {
+            stringBuilder.append(entry.getKey()).append("\n");
         }
-        clonedOrder.setProductList(copiedProductList);
-
-        return clonedOrder;
+        return stringBuilder.toString();
     }
 }

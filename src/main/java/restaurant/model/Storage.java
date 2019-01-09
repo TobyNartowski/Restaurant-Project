@@ -6,12 +6,13 @@ import javax.persistence.*;
 public class Storage {
 
     @Transient
-    public static Storage instance;
+    private static Storage instance;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
+    private Long id;
+    @OneToOne
+    private Ingredient ingredient;
     private int quantity;
 
     public static Storage getInstance() {

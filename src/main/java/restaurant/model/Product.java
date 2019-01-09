@@ -1,5 +1,8 @@
 package restaurant.model;
 
+import org.hibernate.annotations.Fetch;
+import org.springframework.core.style.ToStringCreator;
+
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,5 +58,19 @@ public class Product {
 
     public List<Ingredient> getIngredientList() {
         return ingredientList;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder(name).append(" [");
+        boolean leastOne = false;
+        for (Ingredient ingredient : ingredientList) {
+            stringBuilder.append(ingredient).append(", ");
+            leastOne = true;
+        }
+        if (leastOne) {
+            stringBuilder.replace(stringBuilder.length() - 2, stringBuilder.length(), "]");
+        }
+        return stringBuilder.toString();
     }
 }

@@ -4,61 +4,70 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import restaurant.database.AdressRepository;
+import restaurant.database.IngredientRepository;
+import restaurant.database.OrderRepository;
+import restaurant.database.ProductRepository;
+import restaurant.exception.OrderEmptyFieldException;
 import restaurant.model.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @SpringBootApplication
 public class RestaurantApplication {
 
+    // TODO: toString
+
+    private static final Ingredient dough = new Ingredient("Dough", 300);
+    private static final Ingredient sauce = new Ingredient("Sauce", 100);
+    private static final Ingredient cheese = new Ingredient("Cheese", 200);
+    private static final Ingredient ham = new Ingredient("Ham", 300);
+
+    private static final Ingredient orange = new Ingredient("Orange", 100);
+    private static final Ingredient water = new Ingredient("Water", 50);
+
+    private static final Product pizza = new Product("Pizza", 1100, Arrays.asList(
+            dough, sauce, cheese, ham
+    ));
+
+    private static final Product juice = new Product("Orange juice", 300, Arrays.asList(
+            orange, water
+    ));
+
     public static void main(String[] args) {
-        Product pizza = new Product("Pizza", 1000 , Arrays.asList(
-                new Ingredient("Dough", 200),
-                new Ingredient("Tomato sauce", 50),
-                new Ingredient("Cheese", 300),
-                new Ingredient("Ham", 300)
-        ));
-
-        Product juice = new Product("Orange juice", 200, Arrays.asList(
-                new Ingredient("Water", 10),
-                new Ingredient("Orange", 150)
-        ));
-
-        try {
-            Order prototype = Order.getPrototype();
-            prototype.addProduct(pizza, 2);
-            prototype.addProduct(juice, 1);
-
-            Order order = (Order) prototype.clone();
-            order.getProductList().forEach((x, y) -> {
-                System.out.println("* " + x.getName() + " " + y);
-            });
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-
-        Storage storage = Storage.getInstance();
-
         ConfigurableApplicationContext ctx =
                 SpringApplication.run(RestaurantApplication.class, args);
         AdressRepository repository = ctx.getBean(AdressRepository.class);
 
-        List<Address> adresy = new ArrayList<>();
-        adresy.add(new Address("Kielce","Mloda", "57"));
-        adresy.add(new Address("Warszawa", "asd", "123"));
-        adresy.add(new Address("Gdansk", "Piewsza", "1234"));
 
-        adresy.forEach(repository::save);
+        IngredientRepository ingredientRepository = ctx.getBean(IngredientRepository.class);
+        ingredientRepository.save(dough);
+        ingredientRepository.save(sauce);
+        ingredientRepository.save(cheese);
+        ingredientRepository.save(ham);
+        ingredientRepository.save(orange);
+        ingredientRepository.save(water);
 
-        List<Address> addressList = repository.findAll();
-        Optional<Address> addresOptional = repository.findById(2L);
-        if(addresOptional.isPresent())
-        System.out.println(addresOptional);
-        addressList.forEach(System.out::println);
+        ProductRepository productRepository = ctx.getBean(ProductRepository.class);
+        productRepository.save(pizza);
+        productRepository.save(juice);
 
+        OrderRepository orderRepository = ctx.getBean(OrderRepository.class);
+
+        try {
+            OrderBuilder orderBuilder = new OrderBuilder();
+            orderBuilder.addProduct(pizza, 1);
+            orderBuilder.addProduct(juice, 2);
+            Order order = orderBuilder.build();
+
+            orderRepository.save(order);
+            Optional<Order> result = orderRepository.findById(1L);
+            if (result.isPresent()) {
+                System.out.println(order);
+            }
+        } catch (OrderEmptyFieldException e) {
+            e.printStackTrace();
+        }
+
+        ctx.close();
     }
 }
-

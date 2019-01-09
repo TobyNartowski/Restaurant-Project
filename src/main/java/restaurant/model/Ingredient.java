@@ -1,9 +1,27 @@
 package restaurant.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import restaurant.database.IngredientRepository;
+
 import javax.persistence.*;
+import java.util.Arrays;
 
 @Entity
 public class Ingredient {
+
+    /*
+    private IngredientRepository ingredientRepository;
+
+    @Transient public static final Ingredient dough = new Ingredient("Ciasto", 30);
+    @Transient public static final Ingredient pizzaSauce = new Ingredient("Sos do pizzy", 10);
+    @Transient public static final Ingredient cheese = new Ingredient("Ser", 20);
+    @Transient public static final Ingredient ham = new Ingredient("Szynka", 30);
+
+    @Autowired
+    public Ingredient(IngredientRepository ingredientRepository) {
+        this.ingredientRepository = ingredientRepository;
+    }
+    */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,5 +56,10 @@ public class Ingredient {
 
     public void setPrice(long price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
