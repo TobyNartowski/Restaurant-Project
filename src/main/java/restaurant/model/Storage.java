@@ -17,7 +17,7 @@ public class Storage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
     @ElementCollection
-        private Map<Ingredient, Integer> ingredientList;
+        private Map<String, Integer> ingredientList;
 
     public static Storage getInstance() {
         if (instance == null) {
@@ -28,7 +28,7 @@ public class Storage {
 
     //todo profileDEV
     public void firstInit(IngredientRepository ingredientRepository) {
-        List<Ingredient> ingredients = ingredientRepository.findAll();
+        List<String> ingredients = ingredientRepository.getAllIngredients();
         ingredientList = new HashMap<>();
         for (int i = 0; i < ingredients.size(); i++) {
             ingredientList.put(ingredients.get(i), 100);
@@ -36,7 +36,18 @@ public class Storage {
     }
 
     public void initialize(StorageRepository repository) {
-        //productList = repository.findAll();
+        //get all product list
+        List<String> ingredients = repository.getIngredientList("Pizza");
+        for (int i = 0; i < ingredients.size(); i++) {
+            ingredientList.put(ingredients.get(i), repository.getIngredientQuantity(ingredients.get(i)));
+        }
+    }
+
+    public void printIngredientList() {
+        System.out.println("Current ingredients :");
+        for(Map.Entry<String, Integer> entry : ingredientList.entrySet()) {
+            System.out.println(entry.getKey() + " - " + entry.getValue());
+        }
     }
 
     public Long getId() {
@@ -47,11 +58,11 @@ public class Storage {
         this.id = id;
     }
 
-    public Map<Ingredient, Integer> getIngredientList() {
+    public Map<String, Integer> getIngredientList() {
         return ingredientList;
     }
 
-    public void setIngredientList(Map<Ingredient, Integer> ingredientList) {
+    public void setIngredientList(Map<String, Integer> ingredientList) {
         this.ingredientList = ingredientList;
     }
 }

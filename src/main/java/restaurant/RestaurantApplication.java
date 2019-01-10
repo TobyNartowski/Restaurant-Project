@@ -80,6 +80,9 @@ public class RestaurantApplication {
 
         storageRepository.save(storage);
 
+        storage.initialize(storageRepository);
+
+        storage.printIngredientList();
 
         ctx.close();
     }

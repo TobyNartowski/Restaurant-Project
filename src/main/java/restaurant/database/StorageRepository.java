@@ -3,13 +3,22 @@ package restaurant.database;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import restaurant.model.Ingredient;
 import restaurant.model.Storage;
 
-import java.util.Map;
+import java.util.List;
 
 
 @Repository
 public interface StorageRepository extends JpaRepository<Storage, Long> {
+
+    @Query(value = "select i.name from ingredient i, product p, product_ingredient_list pl, storage_ingredient_list s where\n" +
+            "p.name = ?1 and p.id = pl.product_id and pl.ingredient_list_id = i.id and i.name = s.ingredient_list_key",
+    nativeQuery = true)
+    List<String> getIngredientList(String product);
+
+    @Query(value = "select s.ingredient_list from ingredient i, storage_ingredient_list s\n" +
+            "where i.name = ?1 and i.name = ingredient_list_key ;", nativeQuery = true)
+    Integer getIngredientQuantity(String ingredient);
+
 
 }
