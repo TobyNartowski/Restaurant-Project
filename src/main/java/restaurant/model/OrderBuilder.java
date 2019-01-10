@@ -20,11 +20,17 @@ public class OrderBuilder {
         order.setNote(note);
     }
 
+    public void asignEmployee(Employee employee) {
+        order.setEmployee(employee);
+    }
+
     public Order build() throws OrderEmptyFieldException {
         if (order.getProductList().isEmpty()) {
             throw new OrderEmptyFieldException();
         }
         order.setStatus(Order.Status.UTWORZONE);
+        // todo order.getStatus().setEmployee(employee);
+
         return order;
     }
 }

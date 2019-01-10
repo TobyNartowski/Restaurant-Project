@@ -25,9 +25,11 @@ public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+        private Long id;
     private String name;
     private long price;
+    
+    public Ingredient() {}
 
     public Ingredient(String name, long price) {
         this.name = name;

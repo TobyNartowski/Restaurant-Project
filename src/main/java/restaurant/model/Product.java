@@ -3,10 +3,7 @@ package restaurant.model;
 import org.hibernate.annotations.Fetch;
 import org.springframework.core.style.ToStringCreator;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -14,11 +11,11 @@ public class Product {
 
     @Id
     @GeneratedValue
-    private Long id;
+        private Long id;
+    @ElementCollection(fetch = FetchType.EAGER)
+        private List<Ingredient> ingredientList;
     private String name;
     private long price;
-    @ElementCollection
-    private List<Ingredient> ingredientList;
 
     public Product() {}
 

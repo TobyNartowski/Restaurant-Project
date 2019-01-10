@@ -1,15 +1,20 @@
 package restaurant.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
-
+@Entity
 public class Reservation {
-
-    private Long id;
+    //todo czy client potrzebny
+    @Id
+    @GeneratedValue
+        private Long id;
+    @OneToOne(mappedBy = "reservation")
+        private Client bookkeeper;
+//    @Column() set max value
     private int tableNumber;
     private Date date;
     private int numberOfPeople;
-    private Client bookkeeper;
 
     public Reservation() {}
 

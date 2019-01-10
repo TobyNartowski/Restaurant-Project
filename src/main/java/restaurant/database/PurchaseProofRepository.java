@@ -2,8 +2,8 @@ package restaurant.database;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import restaurant.model.Employee;
+import restaurant.model.PurchaseProof;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+public interface PurchaseProofRepository extends JpaRepository<PurchaseProof, Long> {
 }

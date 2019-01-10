@@ -3,10 +3,7 @@ package restaurant;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import restaurant.database.AdressRepository;
-import restaurant.database.IngredientRepository;
-import restaurant.database.OrderRepository;
-import restaurant.database.ProductRepository;
+import restaurant.database.*;
 import restaurant.exception.OrderEmptyFieldException;
 import restaurant.model.*;
 
@@ -15,8 +12,8 @@ import java.util.*;
 @SpringBootApplication
 public class RestaurantApplication {
 
-    // TODO: toString
-
+//    // TODO: toString
+//
     private static final Ingredient dough = new Ingredient("Dough", 300);
     private static final Ingredient sauce = new Ingredient("Sauce", 100);
     private static final Ingredient cheese = new Ingredient("Cheese", 200);
@@ -36,7 +33,9 @@ public class RestaurantApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx =
                 SpringApplication.run(RestaurantApplication.class, args);
-        AdressRepository repository = ctx.getBean(AdressRepository.class);
+
+        AdressRepository adressRepository = ctx.getBean(AdressRepository.class);
+        EmployeeRepository employeeRepository = ctx.getBean(EmployeeRepository.class);
 
 
         IngredientRepository ingredientRepository = ctx.getBean(IngredientRepository.class);
@@ -67,6 +66,20 @@ public class RestaurantApplication {
         } catch (OrderEmptyFieldException e) {
             e.printStackTrace();
         }
+
+        Address address = new Address("Kielce","Warszawska", "55");
+        adressRepository.save(address);
+        Employee employee = new Employee("First", "Worker", address, 555555555,Employee.Type.WAITER);
+        employeeRepository.save(employee);
+        Employee employee2 = new Employee("First", "Worker", address, 555555555,Employee.Type.COOK);
+        employeeRepository.save(employee2);
+
+        StorageRepository storageRepository = ctx.getBean(StorageRepository.class);
+        Storage storage = Storage.getInstance();
+        storage.firstInit(ingredientRepository);
+
+        storageRepository.save(storage);
+
 
         ctx.close();
     }

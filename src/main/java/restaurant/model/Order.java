@@ -19,7 +19,11 @@ public class Order implements Cloneable {
 
         private String note;
         private Date date;
-//        private Employee employee;
+        private Employee employee;
+
+        Status(Employee employee) {
+            this.employee = employee;
+        }
 
         Status(String note) {
             this.note = note;
@@ -33,13 +37,13 @@ public class Order implements Cloneable {
             return date;
         }
 
-//        public Employee getEmployee() {
-//            return employee;
-//        }
-//
-//        public void setEmployee(Employee employee) {
-//            this.employee = employee;
-//        }
+        public Employee getEmployee() {
+            return employee;
+        }
+
+        public void setEmployee(Employee employee) {
+            this.employee = employee;
+        }
     }
 
     @Transient
@@ -47,18 +51,28 @@ public class Order implements Cloneable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+        private Long id;
     @ElementCollection
-    private Map<Product, Integer> productList = new HashMap<>();
-    private boolean payment = false;
+        private Map<Product, Integer> productList = new HashMap<>();
     @Enumerated(EnumType.STRING)
-    private Status status;
+        private Status status;
+    @ManyToMany(mappedBy = "orderList")
+        private List<Client> clientList;
+    @OneToOne
+    @JoinColumn(name = "purchase_id")
+        private PurchaseProof purchaseProof;
+    @OneToOne
+        private Address deliveryAddress;
+    @OneToOne
+        private Reservation table;
+    @OneToOne
+    @JoinColumn(name = "employee_order")
+        private Employee employee;
+    private boolean payment = false;
     private String note;
-    //private List<PurchaseProof> purchaseProof;
-    //private Address deliveryAddress;
-    //private Reservation table;
 
     Order() {}
+
 
     public Long getId() {
         return id;
@@ -101,7 +115,7 @@ public class Order implements Cloneable {
         this.status = status;
     }
 
-    public List<PurchaseProof> getPurchaseProof() {
+    public PurchaseProof getPurchaseProof() {
         return null;
     }
 
@@ -119,6 +133,26 @@ public class Order implements Cloneable {
 
     public String getNote() {
         return note;
+    }
+
+    public void setPurchaseProof(PurchaseProof purchaseProof) {
+        this.purchaseProof = purchaseProof;
+    }
+
+    public Address getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(Address deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     @Override
