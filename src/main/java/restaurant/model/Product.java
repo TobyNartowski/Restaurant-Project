@@ -9,9 +9,9 @@ public class Product {
 
     @Id
     @GeneratedValue
-    private Long id;
-    @ElementCollection
-    private List<Ingredient> ingredientList;
+        private Long id;
+    @ManyToMany
+        private List<Ingredient> ingredientList;
     private String name;
     private long price;
 
