@@ -1,6 +1,5 @@
 package restaurant.model;
 
-import restaurant.database.IngredientRepository;
 import restaurant.database.StorageRepository;
 
 import javax.persistence.*;
@@ -27,13 +26,7 @@ public class Storage {
         return instance;
     }
 
-    public void loadIngredientsFromDatabase(IngredientRepository ingredientRepository) {
-        List<String> ingredients = ingredientRepository.getAllIngredients();
-        ingredients.forEach((x) -> ingredientList.put(x, 100));
-    }
-
-    public void initialize(StorageRepository repository) {
-        //get all product list
+    public void loadIngredientsFromDatabase(StorageRepository repository) {
         List<String> ingredients = repository.getIngredientList("Pizza");
         for (String ingredient : ingredients) {
             ingredientList.put(ingredient, repository.getIngredientQuantity(ingredient));

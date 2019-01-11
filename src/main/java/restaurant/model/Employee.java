@@ -20,16 +20,16 @@ public class Employee {
     @OneToOne(mappedBy = "employee")
         private Order order;
     private String rfid;
-    private String name;
+    private String firstName;
     private String lastName;
     private long phoneNumber;
 
     public Employee() {}
 
-    public Employee(String name, String lastName, Address adress, long phoneNumber, Type type) {
-        this.name = name;
+    public Employee(String firstName, String lastName, Address address, long phoneNumber, Type type) {
+        this.firstName = firstName;
         this.lastName = lastName;
-        this.address = adress;
+        this.address = address;
         this.phoneNumber = phoneNumber;
         this.type = type;
         this.rfid = generateRandomRfid();
@@ -86,12 +86,12 @@ public class Employee {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {

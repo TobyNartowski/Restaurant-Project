@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import restaurant.model.Address;
 
 @Repository
-public interface AdressRepository extends JpaRepository<Address, Long> {
+public interface AddressRepository extends JpaRepository<Address, Long> {
 }
