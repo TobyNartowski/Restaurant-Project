@@ -11,9 +11,9 @@ public class Product {
 
     @Id
     @GeneratedValue
-        private Long id;
+    private Long id;
     @ElementCollection(fetch = FetchType.EAGER)
-        private List<Ingredient> ingredientList;
+    private List<Ingredient> ingredientList;
     private String name;
     private long price;
 

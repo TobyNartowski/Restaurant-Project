@@ -7,10 +7,16 @@ import java.util.Date;
 public class PurchaseProof {
 
     public enum PurchaseType {
-        BILL, FACTURE;
+        BILL("Paragon"), FACTURE("Faktura");
 
-        public void zmienTyp() {
+        private String value;
 
+        PurchaseType(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
         }
     }
 

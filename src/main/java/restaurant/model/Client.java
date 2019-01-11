@@ -12,12 +12,12 @@ public class Client {
     @JoinTable(name = "client_orders",
         joinColumns = {@JoinColumn(name = "client_id", referencedColumnName = "id")},
         inverseJoinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "id")})
-        private List<Order> orderList;
+    private List<Order> orderList;
     @OneToOne
         private Address address;
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "client_reservation")
-        private Reservation reservation;
+    private Reservation reservation;
     private String login;
     private String hash;
     private String name;

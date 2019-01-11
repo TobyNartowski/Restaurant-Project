@@ -20,6 +20,7 @@ public class Order implements Cloneable {
         private String note;
         private Date date;
         private Employee employee;
+        private static Status[] statusValues = values();
 
         Status(Employee employee) {
             this.employee = employee;
@@ -29,8 +30,10 @@ public class Order implements Cloneable {
             this.note = note;
         }
 
-        public void nextStatus(Employee employee) {
-
+        public Status nextStatus(Employee employee) {
+            Status newStatus = statusValues[(this.ordinal() + 1) % statusValues.length];
+            newStatus.setEmployee(employee);
+            return newStatus;
         }
 
         public Date getDate() {
@@ -73,7 +76,6 @@ public class Order implements Cloneable {
 
     Order() {}
 
-
     public Long getId() {
         return id;
     }
@@ -106,9 +108,8 @@ public class Order implements Cloneable {
         payment = true;
     }
 
-    public void changeStatus(Status status, Employee employee) {
-        this.status = status;
-//        this.status.setEmployee(employee);
+    public void nextStatus(Employee employee) {
+        status.nextStatus(employee);
     }
 
     public void setStatus(Status status) {

@@ -13,11 +13,12 @@ public class Storage {
 
     @Transient
     private static Storage instance;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
     @ElementCollection
-        private Map<String, Integer> ingredientList;
+        private Map<String, Integer> ingredientList = new HashMap<>();
 
     public static Storage getInstance() {
         if (instance == null) {
@@ -26,26 +27,22 @@ public class Storage {
         return instance;
     }
 
-    //todo profileDEV
-    public void firstInit(IngredientRepository ingredientRepository) {
+    public void loadIngredientsFromDatabase(IngredientRepository ingredientRepository) {
         List<String> ingredients = ingredientRepository.getAllIngredients();
-        ingredientList = new HashMap<>();
-        for (int i = 0; i < ingredients.size(); i++) {
-            ingredientList.put(ingredients.get(i), 100);
-        }
+        ingredients.forEach((x) -> ingredientList.put(x, 100));
     }
 
     public void initialize(StorageRepository repository) {
         //get all product list
         List<String> ingredients = repository.getIngredientList("Pizza");
-        for (int i = 0; i < ingredients.size(); i++) {
-            ingredientList.put(ingredients.get(i), repository.getIngredientQuantity(ingredients.get(i)));
+        for (String ingredient : ingredients) {
+            ingredientList.put(ingredient, repository.getIngredientQuantity(ingredient));
         }
     }
 
     public void printIngredientList() {
-        System.out.println("Current ingredients :");
-        for(Map.Entry<String, Integer> entry : ingredientList.entrySet()) {
+        System.out.println("Current ingredients:");
+        for (Map.Entry<String, Integer> entry : ingredientList.entrySet()) {
             System.out.println(entry.getKey() + " - " + entry.getValue());
         }
     }

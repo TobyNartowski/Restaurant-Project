@@ -29,7 +29,6 @@ public class OrderBuilder {
             throw new OrderEmptyFieldException();
         }
         order.setStatus(Order.Status.UTWORZONE);
-        // todo order.getStatus().setEmployee(employee);
 
         return order;
     }

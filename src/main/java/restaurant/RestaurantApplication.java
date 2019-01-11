@@ -7,13 +7,21 @@ import restaurant.database.*;
 import restaurant.exception.OrderEmptyFieldException;
 import restaurant.model.*;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.*;
 
 @SpringBootApplication
 public class RestaurantApplication {
 
-//    // TODO: toString
-//
+    public static void main(String[] args) {
+        ConfigurableApplicationContext ctx =
+                SpringApplication.run(RestaurantApplication.class, args);
+
+        saveDummyData(ctx);
+        ctx.close();
+    }
+
     private static final Ingredient dough = new Ingredient("Dough", 300);
     private static final Ingredient sauce = new Ingredient("Sauce", 100);
     private static final Ingredient cheese = new Ingredient("Cheese", 200);
@@ -30,13 +38,9 @@ public class RestaurantApplication {
             orange, water
     ));
 
-    public static void main(String[] args) {
-        ConfigurableApplicationContext ctx =
-                SpringApplication.run(RestaurantApplication.class, args);
-
+    public static void saveDummyData(ConfigurableApplicationContext ctx) {
         AdressRepository adressRepository = ctx.getBean(AdressRepository.class);
         EmployeeRepository employeeRepository = ctx.getBean(EmployeeRepository.class);
-
 
         IngredientRepository ingredientRepository = ctx.getBean(IngredientRepository.class);
         ingredientRepository.save(dough);
@@ -69,21 +73,17 @@ public class RestaurantApplication {
 
         Address address = new Address("Kielce","Warszawska", "55");
         adressRepository.save(address);
-        Employee employee = new Employee("First", "Worker", address, 555555555,Employee.Type.WAITER);
+        Employee employee = new Employee("First", "Worker", address, 111222333, Employee.Type.WAITER);
         employeeRepository.save(employee);
-        Employee employee2 = new Employee("First", "Worker", address, 555555555,Employee.Type.COOK);
+        Employee employee2 = new Employee("Second", "Worker", address, 444555666, Employee.Type.COOK);
         employeeRepository.save(employee2);
 
         StorageRepository storageRepository = ctx.getBean(StorageRepository.class);
         Storage storage = Storage.getInstance();
-        storage.firstInit(ingredientRepository);
+        storage.loadIngredientsFromDatabase(ingredientRepository);
 
         storageRepository.save(storage);
-
-        storage.initialize(storageRepository);
-
+        ///storage.initialize(storageRepository);
         storage.printIngredientList();
-
-        ctx.close();
     }
 }

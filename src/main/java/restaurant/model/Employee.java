@@ -1,10 +1,12 @@
 package restaurant.model;
 
 import javax.persistence.*;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 @Entity
 public class Employee {
-    public enum Type{
+    public enum Type {
         WAITER, SUPPLIER, COOK
     }
 
@@ -30,6 +32,27 @@ public class Employee {
         this.address = adress;
         this.phoneNumber = phoneNumber;
         this.type = type;
+        this.rfid = generateRandomRfid();
+    }
+
+    private String generateRandomRfid() {
+        byte[] bytes = new byte[12];
+
+        try {
+            SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
+            random.nextBytes(bytes);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (byte oneByte : bytes) {
+            String theHex = Integer.toHexString(oneByte & 0xFF).toUpperCase();
+            stringBuilder.append(theHex.length() == 1 ? "0" + theHex : theHex);
+        }
+
+        return stringBuilder.toString();
     }
 
     public Type getType() {

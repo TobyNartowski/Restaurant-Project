@@ -1,8 +1,8 @@
-wszystkie skladniki do danego produktu
+Wszystkie skladniki do danego produktu
 -- do poprawy
 select i.name, p.name, s.ingredient_list from ingredient i, product p, storage_ingredient_list s, product_ingredient_list pl
 where p.name = 'Pizza' and p.id = pl.product_id and pl.ingredient_list_id = i.id and s.ingredient_list_key = i.id;
 
-wszystkie skladniki wykorzystywane w produktach
+Wszystkie skladniki wykorzystywane w produktach
 select i.name, p.name, s.ingredient_list from ingredient i, product p, storage_ingredient_list s, product_ingredient_list pl
 where p.id = pl.product_id and pl.ingredient_list_id = i.id and s.ingredient_list_key = i.id;
