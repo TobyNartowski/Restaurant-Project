@@ -1,11 +1,10 @@
 package restaurant.model;
 
+import restaurant.database.ProductRepository;
 import restaurant.database.StorageRepository;
 
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Entity
 public class Storage {
@@ -26,10 +25,15 @@ public class Storage {
         return instance;
     }
 
-    public void loadIngredientsFromDatabase(StorageRepository repository) {
-        List<String> ingredients = repository.getIngredientList("Pizza");
-        for (String ingredient : ingredients) {
-            ingredientList.put(ingredient, repository.getIngredientQuantity(ingredient));
+
+    public void loadIngredientsFromDatabase(StorageRepository repository, ProductRepository productRepository) {
+        List<Product> products = productRepository.findAll();
+
+        for (int i = 0; i < products.size(); i++) {
+            List<String> ingredients = repository.getIngredientList(products.get(i).getName());
+            for (String ingredient : ingredients) {
+                ingredientList.put(ingredient, repository.getIngredientQuantity(ingredient));
+            }
         }
     }
 
@@ -39,6 +43,7 @@ public class Storage {
             System.out.println(entry.getKey() + " - " + entry.getValue());
         }
     }
+
 
     public Long getId() {
         return id;

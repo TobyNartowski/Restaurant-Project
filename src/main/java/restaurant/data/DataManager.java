@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import restaurant.database.IngredientRepository;
+import restaurant.database.StorageRepository;
 import restaurant.exception.ClassIsNotEntityException;
 import restaurant.model.*;
 
