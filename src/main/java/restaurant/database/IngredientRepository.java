@@ -12,4 +12,7 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
 
     @Query(value = "select i.name from ingredient i;", nativeQuery = true)
     List<String> getAllIngredients();
+
+    @Query(value = "select i from ingredient i;", nativeQuery = true)
+    List<Ingredient> getAllIngredientObjects();
 }

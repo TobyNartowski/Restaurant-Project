@@ -9,6 +9,16 @@ import javafx.stage.StageStyle;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import restaurant.data.DataManager;
+import restaurant.database.IngredientRepository;
+import restaurant.database.ProductRepository;
+import restaurant.database.StorageRepository;
+import restaurant.exception.ClassIsNotEntityException;
+import restaurant.model.*;
+
+import javax.persistence.EntityManagerFactory;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class RestaurantApplication extends Application {
@@ -21,21 +31,24 @@ public class RestaurantApplication extends Application {
 //            dataManager.addDummyData(Client.class);
 //            dataManager.addDummyData(Product.class);
 //            dataManager.addDummyData(Employee.class);
-//            dataManager.loadStorage();
+//             dataManager.loadStorage();
 //        } catch (ClassIsNotEntityException e) {
 //            e.printStackTrace();
 //        }
 
-//        StorageRepository storageRepository = ctx.getBean(StorageRepository.class);
-//        ProductRepository productRepository = ctx.getBean(ProductRepository.class);
-//        IngredientRepository ingredientRepository = ctx.getBean(IngredientRepository.class);
+
+        StorageRepository storageRepository = ctx.getBean(StorageRepository.class);
+        ProductRepository productRepository = ctx.getBean(ProductRepository.class);
+        IngredientRepository ingredientRepository = ctx.getBean(IngredientRepository.class);
 //        //Storage.getInstance().firstInit(ingredientRepository);
 //        DataManager dataManager = new DataManager(ctx);
 //        dataManager.loadStorage();
-//
-//        //Storage.getInstance().loadIngredientsFromDatabase(storageRepository, productRepository);
-//        Storage.getInstance().printIngredientList();
-        launch(args);
+
+        //launch(args);
+
+//        save ingredients in datrabase
+//        Storage.getInstance().saveIngredientsInDatabase(storageRepository, ingredientRepository);
+
         ctx.close();
     }
 
@@ -46,7 +59,7 @@ public class RestaurantApplication extends Application {
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
-        primaryStage.show();
+        //zprimaryStage.show();
 
     }
 }

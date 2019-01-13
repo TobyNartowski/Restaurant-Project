@@ -3,13 +3,13 @@ package restaurant.database;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import restaurant.model.Storage;
+import restaurant.model.StorageEntity;
 
 import java.util.List;
 
 
 @Repository
-public interface StorageRepository extends JpaRepository<Storage, Long> {
+public interface StorageRepository extends JpaRepository<StorageEntity, Long> {
 
     @Query(value = "select i.name from ingredient i, product p, product_ingredient_list pl, storage_ingredient_list s where\n" +
             "p.name = ?1 and p.id = pl.product_id and pl.ingredient_list_id = i.id and i.name = s.ingredient_list_key",

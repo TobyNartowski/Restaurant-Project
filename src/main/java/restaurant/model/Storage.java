@@ -1,22 +1,20 @@
 package restaurant.model;
 
+import restaurant.data.Wrapper;
+import restaurant.database.IngredientRepository;
 import restaurant.database.ProductRepository;
 import restaurant.database.StorageRepository;
 
-import javax.persistence.*;
-import java.util.*;
+import javax.persistence.EntityManager;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-@Entity
 public class Storage {
-
-    @Transient
     private static Storage instance;
+    private EntityManager entityManager;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
-    @ElementCollection
-        private Map<String, Integer> ingredientList = new HashMap<>();
+    private Map<String, Integer> ingredientList = new HashMap<>();
 
     public static Storage getInstance() {
         if (instance == null) {
@@ -25,15 +23,15 @@ public class Storage {
         return instance;
     }
 
+    public void loadIngredientsFromDatabase(EntityManager entityManager) {
+//        TypedQuery<Wrapper> query = entityManager.createNamedQuery(StorageEntity.FIND_ALL, Wrapper.class);
+//        List<Wrapper> ingredients = query.getResultList();
+    }
 
-    public void loadIngredientsFromDatabase(StorageRepository repository, ProductRepository productRepository) {
-        List<Product> products = productRepository.findAll();
-
-        for (int i = 0; i < products.size(); i++) {
-            List<String> ingredients = repository.getIngredientList(products.get(i).getName());
-            for (String ingredient : ingredients) {
-                ingredientList.put(ingredient, repository.getIngredientQuantity(ingredient));
-            }
+    public void saveIngredientsInDatabase(StorageRepository repository, IngredientRepository ingredients) {
+        List<Ingredient> keys = ingredients.findAll();
+        for (int i = 0; i < ingredientList.size(); i++) {
+            repository.save(new StorageEntity(keys.get(i), ingredientList.get(keys.get(i).getName())));
         }
     }
 
@@ -42,15 +40,6 @@ public class Storage {
         for (Map.Entry<String, Integer> entry : ingredientList.entrySet()) {
             System.out.println(entry.getKey() + " - " + entry.getValue());
         }
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Map<String, Integer> getIngredientList() {

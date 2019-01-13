@@ -6,7 +6,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import restaurant.database.IngredientRepository;
-import restaurant.database.StorageRepository;
 import restaurant.exception.ClassIsNotEntityException;
 import restaurant.model.*;
 
@@ -29,7 +28,7 @@ public class DataManager {
         IngredientRepository ingredientRepository = context.getBean(IngredientRepository.class);
         List<String> ingredients = ingredientRepository.getAllIngredients();
         Map<String, Integer> ingredientList = new HashMap<>();
-        ingredients.forEach((x) -> ingredientList.put(x, 100));
+        ingredients.forEach((x) -> ingredientList.put(x, random.nextInt(101)));
         Storage.getInstance().setIngredientList(ingredientList);
     }
 
@@ -222,8 +221,7 @@ public class DataManager {
             new Product("Ice tea lemon 0.5l", 450, Arrays.asList()),
             new Product("Pepsi 1l", 550, Arrays.asList()),
             new Product("Mirinda 1l", 550, Arrays.asList()),
-            new Product("Apple juice 1l", 350, Arrays.asList()),
-
+            new Product("Apple juice 1l", 350, Arrays.asList())
     };
 
     @Dummy
