@@ -60,10 +60,10 @@ public class Order implements Cloneable {
     @Enumerated(EnumType.STRING)
         private Status status;
     @ManyToMany(mappedBy = "orderList")
-        private List<Client> clientList;
+    private List<Client> clientList;
     @OneToOne
     @JoinColumn(name = "purchase_id")
-        private PurchaseProof purchaseProof;
+        private PurchaseProof purchaseProof = new PurchaseProof();
     @OneToOne
         private Address deliveryAddress;
     @OneToOne
@@ -74,7 +74,7 @@ public class Order implements Cloneable {
     private boolean payment = false;
     private String note;
 
-    Order() {}
+    public Order() {}
 
     public Long getId() {
         return id;
@@ -154,6 +154,22 @@ public class Order implements Cloneable {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public List<Client> getClientList() {
+        return clientList;
+    }
+
+    public void setClientList(List<Client> clientList) {
+        this.clientList = clientList;
+    }
+
+    public Reservation getTable() {
+        return table;
+    }
+
+    public void setTable(Reservation table) {
+        this.table = table;
     }
 
     @Override

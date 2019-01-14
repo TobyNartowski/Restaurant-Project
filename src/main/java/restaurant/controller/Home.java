@@ -1,3 +1,4 @@
+/*
 package restaurant.controller;
 
 import javafx.fxml.FXML;
@@ -7,7 +8,6 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 public class Home implements Initializable {
 
     @FXML
@@ -21,3 +21,4 @@ public class Home implements Initializable {
 
 
 }
+*/

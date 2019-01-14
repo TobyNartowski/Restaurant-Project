@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 public class Reservation {
-    //todo czy client potrzebny
+    //TODO: czy client potrzebny
     @Id
     @GeneratedValue
         private Long id;

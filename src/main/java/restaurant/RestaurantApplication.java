@@ -1,57 +1,58 @@
 package restaurant;
 
+/*
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+*/
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import restaurant.data.DataManager;
-import restaurant.database.IngredientRepository;
-import restaurant.database.ProductRepository;
-import restaurant.database.StorageRepository;
 import restaurant.exception.ClassIsNotEntityException;
+import restaurant.exception.OrderEmptyFieldException;
+import restaurant.exception.WrongOrderStateException;
+import restaurant.misc.OrderBuilder;
+import restaurant.misc.OrderFacade;
 import restaurant.model.*;
 
-import javax.persistence.EntityManagerFactory;
-import java.util.ArrayList;
-import java.util.List;
-
+// Extends Application class
 @SpringBootApplication
-public class RestaurantApplication extends Application {
+public class RestaurantApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx =
                 SpringApplication.run(RestaurantApplication.class, args);
-//        try {
-//            DataManager dataManager = new DataManager(ctx);
-//            dataManager.addDummyData(Client.class);
-//            dataManager.addDummyData(Product.class);
-//            dataManager.addDummyData(Employee.class);
-//             dataManager.loadStorage();
-//        } catch (ClassIsNotEntityException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            OrderBuilder orderBuilder = new OrderBuilder();
+            orderBuilder.addProduct(DataManager.getProduct(2), 1);
+            orderBuilder.addProduct(DataManager.getProduct(4), 2);
+            orderBuilder.addOrderNote("Some note here");
+            Order order = orderBuilder.build();
+            OrderFacade.sendOrder(order);
+        } catch (OrderEmptyFieldException | WrongOrderStateException e) {
+            e.printStackTrace();
+        }
 
-
-        StorageRepository storageRepository = ctx.getBean(StorageRepository.class);
-        ProductRepository productRepository = ctx.getBean(ProductRepository.class);
-        IngredientRepository ingredientRepository = ctx.getBean(IngredientRepository.class);
-//        //Storage.getInstance().firstInit(ingredientRepository);
-//        DataManager dataManager = new DataManager(ctx);
-//        dataManager.loadStorage();
-
-        //launch(args);
-
-//        save ingredients in datrabase
-//        Storage.getInstance().saveIngredientsInDatabase(storageRepository, ingredientRepository);
 
         ctx.close();
     }
 
+    public static void addData(ConfigurableApplicationContext ctx) {
+        try {
+            DataManager dataManager = new DataManager(ctx);
+            dataManager.addDummyData(Client.class);
+            dataManager.addDummyData(Product.class);
+            dataManager.addDummyData(Employee.class);
+            dataManager.loadStorage();
+        } catch (ClassIsNotEntityException e) {
+            e.printStackTrace();
+        }
+    }
+/*
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("templates/home.fxml"));
@@ -59,7 +60,8 @@ public class RestaurantApplication extends Application {
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
-        //zprimaryStage.show();
+        //primaryStage.show();
 
     }
+*/
 }

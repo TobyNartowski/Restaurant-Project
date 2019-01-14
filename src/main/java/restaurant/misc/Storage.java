@@ -1,9 +1,9 @@
-package restaurant.model;
+package restaurant.misc;
 
-import restaurant.data.Wrapper;
 import restaurant.database.IngredientRepository;
-import restaurant.database.ProductRepository;
 import restaurant.database.StorageRepository;
+import restaurant.model.Ingredient;
+import restaurant.model.StorageEntity;
 
 import javax.persistence.EntityManager;
 import java.util.HashMap;

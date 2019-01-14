@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import restaurant.database.IngredientRepository;
 import restaurant.exception.ClassIsNotEntityException;
+import restaurant.misc.Storage;
 import restaurant.model.*;
 
 import javax.persistence.Entity;
@@ -68,6 +69,10 @@ public class DataManager {
             }
         }
         return null;
+    }
+
+    public static Product getProduct(int id) {
+        return dummyProduct[id];
     }
 
     @Dummy

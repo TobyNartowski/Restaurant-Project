@@ -39,18 +39,18 @@
             <artifactId>reflections</artifactId>
             <version>0.9.11</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.wildfly.swarm/javafx -->
+        <!--
         <dependency>
             <groupId>org.wildfly.swarm</groupId>
             <artifactId>javafx</artifactId>
             <version>2018.5.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.jfoenix/jfoenix -->
         <dependency>
             <groupId>com.jfoenix</groupId>
             <artifactId>jfoenix</artifactId>
             <version>9.0.8</version>
         </dependency>
+        -->
     </dependencies>
 
     <build>

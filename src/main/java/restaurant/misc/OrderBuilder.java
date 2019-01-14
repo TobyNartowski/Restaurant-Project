@@ -1,7 +1,12 @@
-package restaurant.model;
+package restaurant.misc;
 
 import restaurant.exception.OrderEmptyFieldException;
+import restaurant.model.Order;
+import restaurant.model.Product;
+import restaurant.model.Reservation;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class OrderBuilder {
@@ -20,8 +25,8 @@ public class OrderBuilder {
         order.setNote(note);
     }
 
-    public void asignEmployee(Employee employee) {
-        order.setEmployee(employee);
+    public void addTable(Reservation table) {
+        order.setTable(table);
     }
 
     public Order build() throws OrderEmptyFieldException {
