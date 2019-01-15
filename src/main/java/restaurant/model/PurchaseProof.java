@@ -35,7 +35,7 @@ public class PurchaseProof {
 
     public PurchaseProof() {}
 
-    PurchaseProof(Order order, PurchaseType type) {
+    public PurchaseProof(Order order, PurchaseType type) {
         this.order = order;
         this.type = type;
     }

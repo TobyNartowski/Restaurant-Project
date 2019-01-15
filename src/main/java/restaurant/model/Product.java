@@ -1,6 +1,7 @@
 package restaurant.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -11,9 +12,9 @@ public class Product {
     @GeneratedValue
         private Long id;
     @ManyToMany
-        private List<Ingredient> ingredientList;
-    private String name;
-    private long price;
+        protected List<Ingredient> ingredientList = new ArrayList<>();
+    protected String name;
+    protected long price;
 
     public Product() {}
 
@@ -53,6 +54,14 @@ public class Product {
 
     public List<Ingredient> getIngredientList() {
         return ingredientList;
+    }
+
+    public void addIngredient(Ingredient ingredient) {
+        ingredientList.add(ingredient);
+    }
+
+    public boolean removeIngredient(Ingredient ingredient) {
+        return ingredientList.remove(ingredient);
     }
 
     @Override
