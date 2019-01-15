@@ -7,6 +7,10 @@ import java.util.*;
 @Table(name = "orders")
 public class Order implements Cloneable {
 
+    public enum Type {
+        RESTAURANT, DELIVERY
+    }
+
     public enum Status {
         UTWORZONE("Utworzone"),
         ODRZUCONE("Odrzucone"),
@@ -59,6 +63,8 @@ public class Order implements Cloneable {
         private Map<Product, Integer> productList = new HashMap<>();
     @Enumerated(EnumType.STRING)
         private Status status;
+    @Enumerated(EnumType.STRING)
+        private Type type;
     @ManyToMany(mappedBy = "orderList")
     private List<Client> clientList;
     @OneToOne
@@ -94,6 +100,14 @@ public class Order implements Cloneable {
 
     public boolean deleteProduct(int id, int amount) {
         return false;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public Status getStatus() {
@@ -174,7 +188,12 @@ public class Order implements Cloneable {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder("-- Zamowienie --\n");
+        StringBuilder stringBuilder = new StringBuilder();
+        if (type == Type.DELIVERY) {
+            stringBuilder.append("-- Zamówienie na wynos --\n");
+        } else {
+            stringBuilder.append("-- Zamówienie do restauracji --\n");
+        }
         for (Map.Entry<Product, Integer> entry : productList.entrySet()) {
             stringBuilder.append(entry.getKey()).append("\n");
         }

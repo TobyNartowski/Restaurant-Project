@@ -14,15 +14,12 @@ import org.springframework.context.ConfigurableApplicationContext;
 import restaurant.data.DataManager;
 import restaurant.exception.ClassIsNotEntityException;
 import restaurant.exception.OrderEmptyFieldException;
-import restaurant.exception.WrongOrderStateException;
 import restaurant.misc.AddIngredientDecorator;
+import restaurant.misc.DeliveryBuilder;
 import restaurant.misc.IngredientFlyweight;
-import restaurant.misc.OrderBuilder;
-import restaurant.misc.OrderFacade;
 import restaurant.model.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 // Extends Application class
@@ -40,7 +37,18 @@ public class RestaurantApplication {
         Product product = new Product("Hot-dog", 700, list);
 
         product = new AddIngredientDecorator(product, IngredientFlyweight.getIngredient("Tomato sauce"));
-        System.out.println(product);
+        System.out.println("-- Utworzony produkt --\n" + product + "\n");
+
+        // Template method
+        try {
+            DeliveryBuilder builder = new DeliveryBuilder();
+            builder.addProduct(product, 2);
+            builder.addDeliveryAddress(new Address("Kielce", "Warszawska", "20"));
+            Order order = builder.build();
+            System.out.println(order);
+        } catch (OrderEmptyFieldException e) {
+            e.printStackTrace();
+        }
 
         ctx.close();
     }

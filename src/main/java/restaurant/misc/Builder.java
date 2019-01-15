@@ -3,15 +3,13 @@ package restaurant.misc;
 import restaurant.exception.OrderEmptyFieldException;
 import restaurant.model.Order;
 import restaurant.model.Product;
-import restaurant.model.Reservation;
+import restaurant.model.PurchaseProof;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
-public class OrderBuilder {
+public abstract class Builder {
 
-    private Order order = new Order();
+    protected Order order = new Order();
 
     public void addProduct(Product product, int amount) {
         order.addProduct(product, amount);
@@ -25,16 +23,9 @@ public class OrderBuilder {
         order.setNote(note);
     }
 
-    public void addTable(Reservation table) {
-        order.setTable(table);
+    public void addPurchaseProof(PurchaseProof purchaseProof) {
+        order.setPurchaseProof(purchaseProof);
     }
 
-    public Order build() throws OrderEmptyFieldException {
-        if (order.getProductList().isEmpty()) {
-            throw new OrderEmptyFieldException();
-        }
-        order.setStatus(Order.Status.UTWORZONE);
-
-        return order;
-    }
+    public abstract Order build() throws OrderEmptyFieldException;
 }
