@@ -1,5 +1,6 @@
 package restaurant.misc;
 
+import restaurant.data.Wrapper;
 import restaurant.database.IngredientRepository;
 import restaurant.database.StorageRepository;
 import restaurant.model.Ingredient;
@@ -7,12 +8,12 @@ import restaurant.model.StorageEntity;
 
 import javax.persistence.EntityManager;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public class Storage {
     private static Storage instance;
-    private EntityManager entityManager;
 
     private Map<String, Integer> ingredientList = new HashMap<>();
 
@@ -23,9 +24,10 @@ public class Storage {
         return instance;
     }
 
-    public void loadIngredientsFromDatabase(EntityManager entityManager) {
-//        TypedQuery<Wrapper> query = entityManager.createNamedQuery(StorageEntity.FIND_ALL, Wrapper.class);
-//        List<Wrapper> ingredients = query.getResultList();
+    public List<Wrapper> loadIngredientsFromDatabase() {
+        List<Wrapper> list  = new LinkedList<>();
+        //list.forEach(System.out::print);
+        return list;
     }
 
     public void saveIngredientsInDatabase(StorageRepository repository, IngredientRepository ingredients) {

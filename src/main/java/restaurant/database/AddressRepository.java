@@ -6,4 +6,5 @@ import restaurant.model.Address;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {
+
 }

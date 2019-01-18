@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
-import restaurant.database.IngredientRepository;
+import restaurant.database.*;
 import restaurant.exception.ClassIsNotEntityException;
 import restaurant.misc.Storage;
 import restaurant.model.*;
@@ -238,4 +238,34 @@ public class DataManager {
             new Employee("Gerwazy", "Grabowski", dummyAddress[random.nextInt(dummyAddress.length)],
                     random.nextInt(899999999) + 100000000L, Employee.Type.SUPPLIER),
     };
+
+    public void addOrder() {
+        OrderRepository orderRepository = context.getBean(OrderRepository.class);
+        EmployeeRepository employeeRepository = context.getBean(EmployeeRepository.class);
+        AddressRepository addressRepository = context.getBean(AddressRepository.class);
+        ReservationRepository reservationRepository = context.getBean(ReservationRepository.class);
+        ClientRepository clientRepository = context.getBean(ClientRepository.class);
+
+        Client client = clientRepository.getOne(1L);
+        Reservation reservation = new Reservation(2, 3, client);
+        PurchaseProof proof = new PurchaseProof();
+
+        Order order = new Order();
+
+        order.setEmployee(employeeRepository.getOne(1L));
+        order.setDeliveryAddress(addressRepository.getOne(1L));
+        order.setTable(reservation);
+        proof.setOrder(order);
+        proof.setType(PurchaseProof.PurchaseType.BILL);
+        order.setPurchaseProof(proof);
+        order.setStatus(Order.Status.UTWORZONE);
+        order.setType(Order.Type.RESTAURANT);
+        order.setClientList(Arrays.asList(client));
+        Map<Product, Integer> productList = new HashMap<>();
+        productList.put(DataManager.getProduct(3), 44);
+        productList.put(DataManager.getProduct(5), 15);
+        order.setProductList(productList);
+
+        orderRepository.save(order);
+    }
 }

@@ -66,13 +66,13 @@ public class Order implements Cloneable {
     @Enumerated(EnumType.STRING)
         private Type type;
     @ManyToMany(mappedBy = "orderList")
-    private List<Client> clientList;
-    @OneToOne
+        private List<Client> clientList;
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "purchase_id")
         private PurchaseProof purchaseProof = new PurchaseProof();
     @OneToOne
         private Address deliveryAddress;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
         private Reservation table;
     @OneToOne
     @JoinColumn(name = "employee_order")

@@ -1,11 +1,28 @@
 package restaurant.data;
 
 public class Wrapper {
-    protected String string;
-    protected Integer integer;
+    protected String ingredient;
+    protected Integer quantity;
 
-    public Wrapper(String string, Integer integer) {
-        this.string = string;
-        this.integer = integer;
+    public Wrapper(String ingredient, Integer quantity) {
+        this.ingredient = ingredient;
+        this.quantity = quantity;
+    }
+
+    public String getIngredient() {
+        return ingredient;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setIngredient(String ingredient) {
+        this.ingredient = ingredient;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }
+
