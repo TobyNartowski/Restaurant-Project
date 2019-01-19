@@ -3,7 +3,7 @@ package restaurant.controller;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 
-public class Dashboard {
+public class Dashboard extends DraggableWindow {
 
     @FXML
     private Pane pane;

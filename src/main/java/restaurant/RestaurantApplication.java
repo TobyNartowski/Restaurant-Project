@@ -8,7 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import restaurant.data.DataManager;
@@ -19,10 +18,10 @@ import restaurant.model.*;
 public class RestaurantApplication extends Application {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext ctx =
-                SpringApplication.run(RestaurantApplication.class, args);
+//        ConfigurableApplicationContext ctx =
+//                SpringApplication.run(RestaurantApplication.class, args);
         launch(args);
-        ctx.close();
+//        ctx.close();
     }
 
     @Override

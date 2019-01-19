@@ -1,19 +1,26 @@
 package restaurant.controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.hibernate.jdbc.Work;
 import restaurant.thread.Worker;
+import restaurant.thread.db.LoginUser;
 import restaurant.thread.fx.LoadPane;
-import restaurant.thread.fx.LoadWindow;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-public class Start implements Initializable {
+public class Start extends DraggableWindow {
 
     @FXML
     private Pane pane;
+    @FXML
+    private TextField loginField;
+    @FXML
+    private TextField passwordField;
 
     @FXML
     private void onExitClick() {
@@ -22,8 +29,17 @@ public class Start implements Initializable {
 
     @FXML
     private void onLoginClick() {
-        // TODO: Login logic here
-        Worker.newTask(new LoadWindow(pane, "Restauracja", "/fxml/dashboard.fxml", 1280, 720));
+        if (loginField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+            generateAlert("Wszystkie pola muszą być uzupełnione!");
+        } else {
+            Worker.newTask(new LoginUser(pane, loginField.getText(), passwordField.getText()));
+        }
+    }
+
+    private void centerStage(Stage stage, double width, double height) {
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((screenBounds.getWidth() - width) / 2);
+        stage.setY((screenBounds.getHeight() - height) / 2);
     }
 
     @FXML
@@ -34,10 +50,5 @@ public class Start implements Initializable {
     @FXML
     private void onEmployeeClick() {
         Worker.newTask(new LoadPane(pane, "/fxml/employee.fxml"));
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
     }
 }
