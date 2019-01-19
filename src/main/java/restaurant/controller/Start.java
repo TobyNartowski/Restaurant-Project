@@ -1,24 +1,23 @@
-/*
 package restaurant.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-public class Home implements Initializable {
+public class Start implements Initializable {
 
     @FXML
-        private AnchorPane anchorPane;
+    private AnchorPane anchorPane;
+
     @FXML
-        private ImageView startImage;
+    private void onExitClick() {
+        System.exit(0);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
     }
-
-
 }
-*/
