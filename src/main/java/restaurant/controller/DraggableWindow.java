@@ -15,14 +15,21 @@ public class DraggableWindow implements Initializable {
     private static double y;
 
     @FXML
-    private Pane pane;
+    protected Pane pane;
 
-    protected void generateAlert(String msg) {
+    @FXML
+    protected void onExitClick() {
+        System.exit(0);
+    }
+
+    public static void generateAlert(Pane pane, String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(msg);
         alert.setHeaderText(null);
         alert.setGraphic(null);
-        alert.getDialogPane().getStylesheets().add(getClass().getResource("/styles/style.css").toString());
+        alert.setX(pane.getScene().getWindow().getX() + (pane.getScene().getWindow().getWidth() / 2.0) - (alert.getDialogPane().getWidth() / 2.0));
+        alert.setY(pane.getScene().getWindow().getY() + (pane.getScene().getWindow().getHeight() / 2.0) - (alert.getDialogPane().getHeight() / 2.0) - 72.0);
+        alert.getDialogPane().getStylesheets().add(DraggableWindow.class.getResource("/styles/style.css").toString());
         ((Stage) alert.getDialogPane().getScene().getWindow()).initStyle(StageStyle.UNDECORATED);
         alert.show();
     }

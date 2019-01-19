@@ -5,13 +5,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import restaurant.thread.Worker;
 import restaurant.thread.db.LoginEmployee;
-import restaurant.thread.db.LoginUser;
 import restaurant.thread.fx.LoadPane;
 
 public class Employee extends DraggableWindow {
 
-    @FXML
-    private Pane pane;
     @FXML
     private TextField idField;
     @FXML
@@ -23,14 +20,9 @@ public class Employee extends DraggableWindow {
     }
 
     @FXML
-    private void onExitClick() {
-        System.exit(0);
-    }
-
-    @FXML
     private void onLoginClick() {
         if (idField.getText().isEmpty() || passwordField.getText().isEmpty()) {
-            generateAlert("Wszystkie pola muszą być uzupełnione!");
+            generateAlert(pane, "Wszystkie pola muszą być uzupełnione!");
         } else {
             Worker.newTask(new LoginEmployee(pane, idField.getText(), passwordField.getText()));
         }

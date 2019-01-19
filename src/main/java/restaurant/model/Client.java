@@ -7,32 +7,32 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    private Long id;
     @ManyToMany
     @JoinTable(name = "client_orders",
         joinColumns = {@JoinColumn(name = "client_id", referencedColumnName = "id")},
         inverseJoinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "id")})
     private List<Order> orderList;
     @OneToOne
-        private Address address;
+    private Address address;
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "client_reservation")
     private Reservation reservation;
     private String login;
     private String hash;
-    private String name;
+    private String firstName;
     private String lastName;
     private long phoneNumber;
 
     public Client() {}
 
-    public Client(Address address, long phoneNumber) {
-        this.address = address;
-        this.phoneNumber = phoneNumber;
+    public Client(String login, String hash) {
+        this.login = login;
+        this.hash = hash;
     }
 
-    public Client(String name, String lastName, Address address, long phoneNumber, String login, String hash) {
-        this.name = name;
+    public Client(String firstName, String lastName, Address address, long phoneNumber, String login, String hash) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -57,11 +57,11 @@ public class Client {
     }
 
     public String getName() {
-        return name;
+        return firstName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.firstName = name;
     }
 
     public String getLastName() {

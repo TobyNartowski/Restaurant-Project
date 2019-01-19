@@ -10,8 +10,6 @@ import restaurant.thread.fx.LoadPane;
 public class Register extends DraggableWindow {
 
     @FXML
-    private Pane pane;
-    @FXML
     private TextField loginField;
     @FXML
     private TextField passwordField;
@@ -26,18 +24,13 @@ public class Register extends DraggableWindow {
     @FXML
     private void onRegisterClick() {
         if (loginField.getText().isEmpty() || passwordField.getText().isEmpty() || repeatField.getText().isEmpty()) {
-            generateAlert("Wszystkie pola muszą być uzupełnione!");
+            generateAlert(pane, "Wszystkie pola muszą być uzupełnione!");
         } else {
             if (!passwordField.getText().equals(repeatField.getText())) {
-                generateAlert("Hasła nie zgadzają się!");
+                generateAlert(pane, "Hasła nie zgadzają się!");
             } else {
                 Worker.newTask(new RegisterUser(pane, loginField.getText(), passwordField.getText()));
             }
         }
-    }
-
-    @FXML
-    private void onExitClick() {
-        System.exit(0);
     }
 }

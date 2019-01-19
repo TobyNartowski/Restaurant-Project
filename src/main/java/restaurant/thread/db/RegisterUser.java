@@ -1,6 +1,14 @@
 package restaurant.thread.db;
 
+import javafx.application.Platform;
 import javafx.scene.layout.Pane;
+import restaurant.controller.DraggableWindow;
+import restaurant.database.ClientRepository;
+import restaurant.misc.ContextWrapper;
+import restaurant.misc.Session;
+import restaurant.model.Client;
+import restaurant.thread.Worker;
+import restaurant.thread.fx.LoadPane;
 
 public class RegisterUser implements Runnable {
 
@@ -16,7 +24,13 @@ public class RegisterUser implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("RegisterUser()");
-        // TODO: register here
+        ClientRepository clientRepository = ContextWrapper.getContext().getBean(ClientRepository.class);
+        if (!clientRepository.exists(login)) {
+            Client client = new Client(login, password);
+            Session.setSession(client);
+            Worker.newTask(new LoadPane(pane, "/fxml/add_client_details.fxml"));
+        } else {
+            Platform.runLater(() -> DraggableWindow.generateAlert(pane, "Użytkownik o podanym loginie już istnieje!"));
+        }
     }
 }

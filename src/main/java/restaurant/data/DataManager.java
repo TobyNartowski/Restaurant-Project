@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import restaurant.database.*;
 import restaurant.exception.ClassIsNotEntityException;
+import restaurant.misc.Password;
 import restaurant.misc.Storage;
 import restaurant.model.*;
 
@@ -91,15 +92,15 @@ public class DataManager {
     @Dummy(dependency = {Address.class})
     private static Client[] dummyClient = {
             new Client("Tadeusz", "Kucharski", dummyAddress[random.nextInt(dummyAddress.length)],
-                random.nextInt(899999999) + 100000000L, "TadeuszKucharski", "pass"),
+                random.nextInt(899999999) + 100000000L, "TadeuszKucharski", Password.hash("pass")),
             new Client("Genowefa", "Czarnecka", dummyAddress[random.nextInt(dummyAddress.length)],
-                    random.nextInt(899999999) + 100000000L, "GenowefaCzarnecka", "pass"),
+                    random.nextInt(899999999) + 100000000L, "GenowefaCzarnecka", Password.hash("pass")),
             new Client("Wisława", "Woźniak", dummyAddress[random.nextInt(dummyAddress.length)],
-                    random.nextInt(899999999) + 100000000L, "WislawaWozniak", "pass"),
+                    random.nextInt(899999999) + 100000000L, "WislawaWozniak", Password.hash("pass")),
             new Client("Witold", "Dudek", dummyAddress[random.nextInt(dummyAddress.length)],
-                    random.nextInt(899999999) + 100000000L, "WitoldDudek", "pass"),
+                    random.nextInt(899999999) + 100000000L, "WitoldDudek", Password.hash("pass")),
             new Client("Dawid", "Chmielewski", dummyAddress[random.nextInt(dummyAddress.length)],
-                    random.nextInt(899999999) + 100000000L, "DawidChmielewski", "pass"),
+                    random.nextInt(899999999) + 100000000L, "DawidChmielewski", Password.hash("pass"))
     };
 
     @Dummy

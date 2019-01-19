@@ -2,13 +2,9 @@ package restaurant.controller;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import org.hibernate.jdbc.Work;
 import restaurant.thread.Worker;
 import restaurant.thread.db.LoginUser;
 import restaurant.thread.fx.LoadPane;
@@ -16,21 +12,14 @@ import restaurant.thread.fx.LoadPane;
 public class Start extends DraggableWindow {
 
     @FXML
-    private Pane pane;
-    @FXML
     private TextField loginField;
     @FXML
     private TextField passwordField;
 
     @FXML
-    private void onExitClick() {
-        System.exit(0);
-    }
-
-    @FXML
     private void onLoginClick() {
         if (loginField.getText().isEmpty() || passwordField.getText().isEmpty()) {
-            generateAlert("Wszystkie pola muszą być uzupełnione!");
+            generateAlert(pane, "Wszystkie pola muszą być uzupełnione!");
         } else {
             Worker.newTask(new LoginUser(pane, loginField.getText(), passwordField.getText()));
         }
