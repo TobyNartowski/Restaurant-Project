@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="restaurant.controller.Register">
+   <children>
+      <FontAwesomeIconView glyphName="TIMES" layoutX="445.0" layoutY="35.0" onMouseReleased="#onExitClick" size="32" style="fx-fill: red;" styleClass="clickable" />
+      <FontAwesomeIconView glyphName="ARROW_LEFT" layoutX="14.0" layoutY="32.0" onMouseReleased="#onBackClick" size="26" style="fx-fill: red;" styleClass="clickable" />
+      <Label alignment="CENTER" layoutX="93.0" layoutY="127.0" text="Zarejestruj się">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="138.0" layoutY="197.0" prefHeight="35.0" prefWidth="204.0" text="podaj swoje dane" textAlignment="RIGHT">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <TextField layoutX="110.0" layoutY="269.0" prefHeight="25.0" prefWidth="259.0" promptText="Login" />
+      <PasswordField layoutX="110.0" layoutY="312.0" prefHeight="25.0" prefWidth="259.0" promptText="Hasło" />
+      <PasswordField layoutX="111.0" layoutY="356.0" prefHeight="25.0" prefWidth="259.0" promptText="Powtórz hasło" />
+      <Button layoutX="111.0" layoutY="400.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="259.0" text="Zarejestruj nowe konto" />
+   </children>
+</AnchorPane>

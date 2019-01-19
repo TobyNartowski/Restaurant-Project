@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="restaurant.controller.Start">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="restaurant.controller.Start">
    <children>
       <FontAwesomeIconView glyphName="TIMES" layoutX="445.0" layoutY="35.0" onMouseReleased="#onExitClick" size="32" style="fx-fill: red;" styleClass="clickable" />
       <Label layoutX="126.0" layoutY="117.0" text="Zaloguj się">
@@ -16,15 +16,15 @@
             <Font size="48.0" />
          </font>
       </Label>
-      <Label layoutX="146.0" layoutY="187.0" prefWidth="212.0" text="do swojego konta">
+      <Label alignment="CENTER" layoutX="135.0" layoutY="187.0" prefWidth="212.0" text="do swojego konta">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
       <TextField layoutX="111.0" layoutY="265.0" prefHeight="25.0" prefWidth="259.0" promptText="Login" />
-      <PasswordField layoutX="111.0" layoutY="308.0" prefHeight="25.0" prefWidth="259.0" promptText="Password" />
-      <Button layoutX="111.0" layoutY="353.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="259.0" text="Zaloguj się" />
-      <Button layoutX="111.0" layoutY="391.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="259.0" styleClass="white" text="Zarejestruj się" />
-      <Label layoutX="170.0" layoutY="602.0" styleClass="clickable-hidden" text="Zaloguj się jako pracownik" />
+      <PasswordField layoutX="111.0" layoutY="308.0" prefHeight="25.0" prefWidth="259.0" promptText="Hasło" />
+      <Button layoutX="111.0" layoutY="353.0" mnemonicParsing="false" onMouseReleased="#onLoginClick" prefHeight="25.0" prefWidth="259.0" text="Zaloguj się" />
+      <Button layoutX="111.0" layoutY="391.0" mnemonicParsing="false" onMouseReleased="#onRegisterClick" prefHeight="25.0" prefWidth="259.0" styleClass="white" text="Zarejestruj się" />
+      <Label layoutX="170.0" layoutY="602.0" onMouseReleased="#onEmployeeClick" styleClass="clickable-hidden" text="Zaloguj się jako pracownik" />
    </children>
 </AnchorPane>

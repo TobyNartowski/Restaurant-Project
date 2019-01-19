@@ -23,8 +23,8 @@
 }
 
 .clickable:hover {
-    -fx-fill: #99ff96;
-    -fx-text-fill: #99ff96;
+    -fx-fill: #9bff7e;
+    -fx-text-fill: #9bff7e;
 }
 
 .button {
@@ -33,7 +33,7 @@
 }
 
 .button:hover {
-    -fx-background-color: #99ff96;
+    -fx-background-color: #9bff7e;
 }
 
 .white {
@@ -42,8 +42,7 @@
 }
 
 .white:hover {
-    -fx-background-color: #161616;
-    -fx-text-fill: #ffffff;
+    -fx-background-color: #e1e1e1;
 }
 
 .text-field {

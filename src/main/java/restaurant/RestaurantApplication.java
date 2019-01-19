@@ -28,9 +28,9 @@ public class RestaurantApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         System.setProperty("prism.lcdtext", "false");
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/start.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/start.fxml"));
         Scene scene = new Scene(root, 480, 640);
-        scene.getStylesheets().add(getClass().getClassLoader().getResource("styles/style.css").toString());
+        scene.getStylesheets().add(getClass().getResource("/styles/style.css").toString());
         scene.setFill(Color.TRANSPARENT);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setResizable(false);
