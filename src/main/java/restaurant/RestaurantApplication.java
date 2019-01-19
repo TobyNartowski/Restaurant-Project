@@ -8,9 +8,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import org.hibernate.Hibernate;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import restaurant.data.AddOrder;
 import restaurant.data.DataManager;
+import restaurant.database.EmployeeRepository;
 import restaurant.exception.ClassIsNotEntityException;
 import restaurant.model.*;
 
@@ -18,10 +22,11 @@ import restaurant.model.*;
 public class RestaurantApplication extends Application {
 
     public static void main(String[] args) {
-//        ConfigurableApplicationContext ctx =
-//                SpringApplication.run(RestaurantApplication.class, args);
-        launch(args);
-//        ctx.close();
+        ConfigurableApplicationContext ctx =
+                SpringApplication.run(RestaurantApplication.class, args);
+//        launch(args);
+        AddOrder order = new AddOrder(ctx);
+        ctx.close();
     }
 
     @Override

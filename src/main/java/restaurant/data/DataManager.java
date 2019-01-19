@@ -77,6 +77,7 @@ public class DataManager {
 
     @Dummy
     private static Address[] dummyAddress = {
+            new Address("Kielce", "Restauracyjna", "1"),
             new Address("Darłowo", "Pocztowa", "20"),
             new Address("Warszawa", "Miła", "49"),
             new Address("Szczecin", "Słowińców", "36"),
@@ -90,6 +91,8 @@ public class DataManager {
 
     @Dummy(dependency = {Address.class})
     private static Client[] dummyClient = {
+            new Client("Restauracja", "Restauracja", dummyAddress[1],
+                    111111111, "admin", "admin"),
             new Client("Tadeusz", "Kucharski", dummyAddress[random.nextInt(dummyAddress.length)],
                 random.nextInt(899999999) + 100000000L, "TadeuszKucharski", "pass"),
             new Client("Genowefa", "Czarnecka", dummyAddress[random.nextInt(dummyAddress.length)],
@@ -99,7 +102,7 @@ public class DataManager {
             new Client("Witold", "Dudek", dummyAddress[random.nextInt(dummyAddress.length)],
                     random.nextInt(899999999) + 100000000L, "WitoldDudek", "pass"),
             new Client("Dawid", "Chmielewski", dummyAddress[random.nextInt(dummyAddress.length)],
-                    random.nextInt(899999999) + 100000000L, "DawidChmielewski", "pass"),
+                    random.nextInt(899999999) + 100000000L, "DawidChmielewski", "pass")
     };
 
     @Dummy
@@ -239,33 +242,4 @@ public class DataManager {
                     random.nextInt(899999999) + 100000000L, Employee.Type.SUPPLIER),
     };
 
-    public void addOrder() {
-        OrderRepository orderRepository = context.getBean(OrderRepository.class);
-        EmployeeRepository employeeRepository = context.getBean(EmployeeRepository.class);
-        AddressRepository addressRepository = context.getBean(AddressRepository.class);
-        ReservationRepository reservationRepository = context.getBean(ReservationRepository.class);
-        ClientRepository clientRepository = context.getBean(ClientRepository.class);
-
-        Client client = clientRepository.getOne(1L);
-        Reservation reservation = new Reservation(2, 3, client);
-        PurchaseProof proof = new PurchaseProof();
-
-        Order order = new Order();
-
-        order.setEmployee(employeeRepository.getOne(1L));
-        order.setDeliveryAddress(addressRepository.getOne(1L));
-        order.setTable(reservation);
-        proof.setOrder(order);
-        proof.setType(PurchaseProof.PurchaseType.BILL);
-        order.setPurchaseProof(proof);
-        order.setStatus(Order.Status.UTWORZONE);
-        order.setType(Order.Type.RESTAURANT);
-        order.setClientList(Arrays.asList(client));
-        Map<Product, Integer> productList = new HashMap<>();
-        productList.put(DataManager.getProduct(3), 44);
-        productList.put(DataManager.getProduct(5), 15);
-        order.setProductList(productList);
-
-        orderRepository.save(order);
-    }
 }
