@@ -13,11 +13,11 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
         private Address address;
     @Enumerated(EnumType.STRING)
         private Type type;
-    @OneToOne(mappedBy = "employee")
+    @OneToOne(mappedBy = "employee", fetch = FetchType.EAGER)
         private Order order;
     private String rfid;
     private String firstName;
