@@ -11,7 +11,7 @@ public class Product {
     @Id
     @GeneratedValue
         private Long id;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
         protected List<Ingredient> ingredientList = new ArrayList<>();
     protected String name;
     protected long price;

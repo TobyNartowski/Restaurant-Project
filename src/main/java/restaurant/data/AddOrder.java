@@ -4,32 +4,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import restaurant.database.*;
 import restaurant.exception.EmptyClassException;
+import restaurant.misc.Storage;
 import restaurant.model.*;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class AddOrder {
     private ApplicationContext ctx;
     private Client client;
     private ClientRepository clientRepository;
     private Reservation reservation;
-    private ReservationRepository reservationRepository;
     private PurchaseProof proof;
     private Employee employee;
     private EmployeeRepository employeeRepository;
     private Address address;
     private AddressRepository addressRepository;
     private Order order;
+    private Order.Type type;
     private Map<Product, Integer> productList = new HashMap<>();
+    private Map<String, Integer> ingredientList;
     private ProductRepository productRepository;
+    private List<String> productNames = new LinkedList<>();
 
     @Autowired
     public AddOrder(ApplicationContext ctx) {
         this.ctx = ctx;
         this.clientRepository = ctx.getBean(ClientRepository.class);
-        this.reservationRepository = ctx.getBean(ReservationRepository.class);
         this.employeeRepository = ctx.getBean(EmployeeRepository.class);
         this.addressRepository = ctx.getBean(AddressRepository.class);
         this.productRepository = ctx.getBean(ProductRepository.class);
@@ -95,7 +95,7 @@ public class AddOrder {
 
     //set order
     public void setOrderType(Order.Type type) {
-        order.setType(type);
+        this.type = type;
     }
 
     //kurwa jebane pobieranie z bazy danych musze zrobic ja jebe
@@ -103,29 +103,38 @@ public class AddOrder {
         //productList.put()
     }
 
+    public void addProduct(String productName) {
+        //lista bo sie jebie
+        productNames.add(productName);
+        List<Product> products = productRepository.findAll();
+        for (int i = 0; i < products.size(); i++) {
+            if(products.get(i).getName() == productName) {
+                productList.put(products.get(i), 1);
+//                for (int j = 0; j < productList.get(productName); j++) {
+//                }
+            }
+        }
+    }
+
     public void addOrder() throws EmptyClassException {
         OrderRepository orderRepository = ctx.getBean(OrderRepository.class);
 
         order = new Order();
 
-        if(proof != null || employee != null || address != null || reservation != null) {
+        if(proof != null || employee != null || address != null || reservation != null || productList.size() != 0
+            || type != null) {
             proof.setOrder(order);
             order.setPurchaseProof(proof);
+            order.setType(type);
             order.setEmployee(employee);
             order.setDeliveryAddress(address);
             order.setTable(reservation);
+            order.setProductList(productList);
         } else throw new EmptyClassException();
 
         order.setStatus(Order.Status.UTWORZONE);
 
         order.setClientList(Arrays.asList(client));
-        DataManager dataManager = new DataManager(ctx);
-        dataManager.loadStorage();
-
-        productList.put(DataManager.getProduct(3), 44);
-        productList.put(DataManager.getProduct(5), 15);
-
-        order.setProductList(productList);
 
         orderRepository.save(order);
     }

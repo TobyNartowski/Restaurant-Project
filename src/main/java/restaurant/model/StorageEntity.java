@@ -13,6 +13,8 @@ public class StorageEntity {
         private Ingredient ingredient;
     private Integer quantity;
 
+    public StorageEntity() {}
+
     public StorageEntity(Ingredient ingredients, Integer quantity) {
         this.ingredient = ingredients;
         this.quantity = quantity;

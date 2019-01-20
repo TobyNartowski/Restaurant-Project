@@ -11,10 +11,17 @@ import javafx.stage.StageStyle;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import restaurant.data.AddOrder;
 import restaurant.data.DataManager;
+import restaurant.database.ProductRepository;
+import restaurant.database.StorageRepository;
 import restaurant.exception.ClassIsNotEntityException;
+import restaurant.exception.EmptyClassException;
 import restaurant.misc.ContextWrapper;
+import restaurant.misc.Storage;
 import restaurant.model.*;
+
+import java.util.List;
 
 @SpringBootApplication
 public class RestaurantApplication extends Application {
@@ -25,6 +32,23 @@ public class RestaurantApplication extends Application {
         ContextWrapper.initWrapper(ctx);
 
         launch(args);
+        //always on start LOAD INGREDIENTS !
+        StorageRepository storageRepository = ctx.getBean(StorageRepository.class);
+        Storage.getInstance().loadIngredientsFromDatabase(storageRepository);
+
+        try {
+            AddOrder addOrder = new AddOrder(ctx);
+            addOrder.setEmployee(1L);
+            addOrder.setClient(1L);
+            addOrder.setAddress(1L);
+            addOrder.setOrderType(Order.Type.DELIVERY);
+            addOrder.setProof(PurchaseProof.PurchaseType.BILL);
+            addOrder.setReservation(2, 2);
+            addOrder.addProduct("Dracula");
+            addOrder.addOrder();
+        } catch (EmptyClassException e) {
+            e.printStackTrace();
+        }
         ctx.close();
     }
 

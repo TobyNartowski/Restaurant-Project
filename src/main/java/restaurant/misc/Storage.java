@@ -1,12 +1,10 @@
 package restaurant.misc;
 
-import restaurant.data.Wrapper;
 import restaurant.database.IngredientRepository;
 import restaurant.database.StorageRepository;
 import restaurant.model.Ingredient;
 import restaurant.model.StorageEntity;
 
-import javax.persistence.EntityManager;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,10 +22,15 @@ public class Storage {
         return instance;
     }
 
-    public List<Wrapper> loadIngredientsFromDatabase() {
-        List<Wrapper> list  = new LinkedList<>();
-        //list.forEach(System.out::print);
-        return list;
+    public Map<String, Integer> loadIngredientsFromDatabase(StorageRepository storageRepository) {
+        List<StorageEntity> listIngredient = new LinkedList<>();
+        listIngredient = storageRepository.findAll();
+
+        for (int i = 0; i < listIngredient.size(); i++) {
+            System.out.println(i + "  " + listIngredient.get(i).getIngredient() + "  " + listIngredient.get(i).getQuantity());
+            this.ingredientList.put(listIngredient.get(i).getIngredient().getName(), listIngredient.get(i).getQuantity());
+        }
+        return this.ingredientList;
     }
 
     public void saveIngredientsInDatabase(StorageRepository repository, IngredientRepository ingredients) {
