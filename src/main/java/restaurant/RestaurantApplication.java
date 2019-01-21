@@ -30,25 +30,7 @@ public class RestaurantApplication extends Application {
         ConfigurableApplicationContext ctx =
                 SpringApplication.run(RestaurantApplication.class, args);
         ContextWrapper.initWrapper(ctx);
-
         launch(args);
-        //always on start LOAD INGREDIENTS !
-        StorageRepository storageRepository = ctx.getBean(StorageRepository.class);
-        Storage.getInstance().loadIngredientsFromDatabase(storageRepository);
-
-        try {
-            AddOrder addOrder = new AddOrder(ctx);
-            addOrder.setEmployee(1L);
-            addOrder.setClient(1L);
-            addOrder.setAddress(1L);
-            addOrder.setOrderType(Order.Type.DELIVERY);
-            addOrder.setProof(PurchaseProof.PurchaseType.BILL);
-            addOrder.setReservation(2, 2);
-            addOrder.addProduct("Dracula");
-            addOrder.addOrder();
-        } catch (EmptyClassException e) {
-            e.printStackTrace();
-        }
         ctx.close();
     }
 

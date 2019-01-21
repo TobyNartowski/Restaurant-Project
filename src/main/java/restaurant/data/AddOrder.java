@@ -42,7 +42,7 @@ public class AddOrder {
 
     //utworzenie dla konkretnego klienta
     public void setClient(String firstname, String lastname, String phonenumber) {
-        client = clientRepository.findClient(firstname, lastname, phonenumber);
+//        client = clientRepository.findClient(firstname, lastname, phonenumber);
     }
 
     //tworzymy rezerwacje jako brak rezerwacji

@@ -1,6 +1,15 @@
 package restaurant.thread.db;
 
+import javafx.application.Platform;
 import javafx.scene.layout.Pane;
+import restaurant.controller.DraggableWindow;
+import restaurant.database.ClientRepository;
+import restaurant.misc.ContextWrapper;
+import restaurant.misc.Password;
+import restaurant.misc.Session;
+import restaurant.model.Client;
+import restaurant.thread.Worker;
+import restaurant.thread.fx.LoadWindow;
 
 public class LoginUser implements Runnable {
 
@@ -16,8 +25,12 @@ public class LoginUser implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("LoginUser()");
-        // TODO: login here
-        //Worker.newTask(new LoadWindow(pane, "Restauracja", "/fxml/dashboard.fxml", 1280, 720));
+        ClientRepository clientRepository = ContextWrapper.getContext().getBean(ClientRepository.class);
+        if (clientRepository.auth(login, Password.hash(password))) {
+            Session.setSession(clientRepository.getClientByLogin(login));
+            Worker.newTask(new LoadWindow(pane, "Restauracja", "/fxml/dashboard.fxml", 1280, 720));
+        } else {
+            Platform.runLater(() -> DraggableWindow.generateAlert(pane, "Użytkownik o podanej kombinacji nie istnieje!"));
+        }
     }
 }

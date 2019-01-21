@@ -3,6 +3,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@NamedQuery(name = "Client.findByLogin", query = "select c from Client c where c.login = :login")
 public class Client {
 
     @Id

@@ -5,6 +5,7 @@ import javafx.scene.layout.Pane;
 import restaurant.controller.DraggableWindow;
 import restaurant.database.ClientRepository;
 import restaurant.misc.ContextWrapper;
+import restaurant.misc.Password;
 import restaurant.misc.Session;
 import restaurant.model.Client;
 import restaurant.thread.Worker;
@@ -26,7 +27,7 @@ public class RegisterUser implements Runnable {
     public void run() {
         ClientRepository clientRepository = ContextWrapper.getContext().getBean(ClientRepository.class);
         if (!clientRepository.exists(login)) {
-            Client client = new Client(login, password);
+            Client client = new Client(login, Password.hash(password));
             Session.setSession(client);
             Worker.newTask(new LoadPane(pane, "/fxml/add_client_details.fxml"));
         } else {

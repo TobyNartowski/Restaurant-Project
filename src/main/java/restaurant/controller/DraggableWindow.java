@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import restaurant.misc.Session;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +20,7 @@ public class DraggableWindow implements Initializable {
 
     @FXML
     protected void onExitClick() {
+        Session.logOut();
         System.exit(0);
     }
 

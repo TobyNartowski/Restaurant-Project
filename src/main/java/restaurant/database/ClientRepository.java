@@ -10,7 +10,13 @@ import restaurant.model.Client;
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
     @Query(value = "select case when count(c) > 0 then true else false end from client c where c.login = :login", nativeQuery = true)
-    public boolean exists(@Param("login") String login);
+    boolean exists(@Param("login") String login);
+
+    @Query(value = "select case when count(c) > 0 then true else false end from client c where c.login = :login and c.hash = :hash", nativeQuery = true)
+    boolean auth(@Param("login") String login, @Param("hash") String hash);
+
+    @Query(name = "Client.findByLogin", nativeQuery = true)
+    Client getClientByLogin(@Param("login") String login);
 
     @Query(value = "select c from client c\n" +
             "where c.name = ?1 and c.last_name = ?2 and phone_number = ?3",
