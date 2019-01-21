@@ -22,6 +22,11 @@ public class Register extends DraggableWindow {
     }
 
     @FXML
+    private void onEnter() {
+        onRegisterClick();
+    }
+
+    @FXML
     private void onRegisterClick() {
         if (loginField.getText().isEmpty() || passwordField.getText().isEmpty() || repeatField.getText().isEmpty()) {
             generateAlert(pane, "Wszystkie pola muszą być uzupełnione!");

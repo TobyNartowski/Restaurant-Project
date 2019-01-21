@@ -35,6 +35,11 @@ public class AddClientDetails extends DraggableWindow {
     }
 
     @FXML
+    private void onEnter() {
+        onRegisterClick();
+    }
+
+    @FXML
     private void onRegisterClick() {
         if (firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || phoneField.getText().isEmpty() ||
                 cityField.getText().isEmpty() || streetField.getText().isEmpty() || numberField.getText().isEmpty()) {

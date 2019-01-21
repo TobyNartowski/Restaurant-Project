@@ -25,6 +25,11 @@ public class Start extends DraggableWindow {
         }
     }
 
+    @FXML
+    private void onEnter() {
+        onLoginClick();
+    }
+
     private void centerStage(Stage stage, double width, double height) {
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((screenBounds.getWidth() - width) / 2);

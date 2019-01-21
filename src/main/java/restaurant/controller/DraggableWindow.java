@@ -24,6 +24,18 @@ public class DraggableWindow implements Initializable {
         System.exit(0);
     }
 
+    protected void setDraggingEvents() {
+        pane.setOnMousePressed(event -> {
+            x = pane.getScene().getWindow().getX() - event.getScreenX();
+            y = pane.getScene().getWindow().getY() - event.getScreenY();
+        });
+
+        pane.setOnMouseDragged(event -> {
+            pane.getScene().getWindow().setX(event.getScreenX() + x);
+            pane.getScene().getWindow().setY(event.getScreenY() + y);
+        });
+    }
+
     public static void generateAlert(Pane pane, String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(msg);
@@ -38,14 +50,6 @@ public class DraggableWindow implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        pane.setOnMousePressed(event -> {
-            x = pane.getScene().getWindow().getX() - event.getScreenX();
-            y = pane.getScene().getWindow().getY() - event.getScreenY();
-        });
-
-        pane.setOnMouseDragged(event -> {
-            pane.getScene().getWindow().setX(event.getScreenX() + x);
-            pane.getScene().getWindow().setY(event.getScreenY() + y);
-        });
+        setDraggingEvents();
     }
 }

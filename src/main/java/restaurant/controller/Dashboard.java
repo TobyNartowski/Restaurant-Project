@@ -22,6 +22,7 @@ public class Dashboard extends DraggableWindow {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setDraggingEvents();
         welcomeText.setText("Welcome " + Session.getClient().getName() + " " + Session.getClient().getLastName() + "!");
     }
 }

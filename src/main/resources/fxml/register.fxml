@@ -24,7 +24,7 @@
       </Label>
       <TextField fx:id="loginField" layoutX="110.0" layoutY="269.0" prefHeight="25.0" prefWidth="259.0" promptText="Login" />
       <PasswordField fx:id="passwordField" layoutX="110.0" layoutY="312.0" prefHeight="25.0" prefWidth="259.0" promptText="Hasło" />
-      <PasswordField fx:id="repeatField" layoutX="111.0" layoutY="356.0" prefHeight="25.0" prefWidth="259.0" promptText="Powtórz hasło" />
+      <PasswordField fx:id="repeatField" layoutX="111.0" layoutY="356.0" onAction="#onEnter" prefHeight="25.0" prefWidth="259.0" promptText="Powtórz hasło" />
       <Button layoutX="111.0" layoutY="419.0" mnemonicParsing="false" onAction="#onRegisterClick" prefHeight="25.0" prefWidth="259.0" text="Przejdź dalej" />
    </children>
 </AnchorPane>

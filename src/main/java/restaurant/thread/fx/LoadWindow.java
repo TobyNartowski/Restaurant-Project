@@ -31,14 +31,11 @@ public class LoadWindow implements Runnable {
         Platform.runLater(() -> {
             try {
                 Stage stage = new Stage();
-                stage.setTitle(windowTitle);
                 Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlDirectory)), width, height);
                 scene.setFill(Color.TRANSPARENT);
+                stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setScene(scene);
                 stage.getScene().getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setMinWidth(width);
-                stage.setMinHeight(height);
                 stage.show();
                 pane.getScene().getWindow().hide();
             } catch (IOException e) {

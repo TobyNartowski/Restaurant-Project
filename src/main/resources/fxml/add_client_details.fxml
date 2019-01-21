@@ -26,7 +26,7 @@
       <TextField fx:id="phoneField" layoutX="110.0" layoutY="322.0" prefHeight="25.0" prefWidth="259.0" promptText="Telefon" />
       <TextField fx:id="cityField" layoutX="111.0" layoutY="387.0" prefHeight="25.0" prefWidth="259.0" promptText="Miasto" />
       <TextField fx:id="streetField" layoutX="110.0" layoutY="431.0" prefHeight="25.0" prefWidth="259.0" promptText="Ulica" />
-      <TextField fx:id="numberField" layoutX="110.0" layoutY="479.0" prefHeight="25.0" prefWidth="259.0" promptText="Numer" />
+      <TextField fx:id="numberField" layoutX="110.0" layoutY="479.0" onAction="#onEnter" prefHeight="25.0" prefWidth="259.0" promptText="Numer" />
       <Button layoutX="111.0" layoutY="538.0" mnemonicParsing="false" onAction="#onRegisterClick" prefHeight="25.0" prefWidth="259.0" text="Zakończ rejestracje" />
    </children>
 </AnchorPane>
