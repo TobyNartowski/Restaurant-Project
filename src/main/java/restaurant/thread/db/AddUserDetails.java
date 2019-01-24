@@ -5,12 +5,12 @@ import javafx.scene.layout.Pane;
 import restaurant.controller.DraggableWindow;
 import restaurant.database.AddressRepository;
 import restaurant.database.ClientRepository;
+import restaurant.exception.SessionNotSet;
 import restaurant.misc.ContextWrapper;
 import restaurant.misc.Session;
 import restaurant.model.Address;
 import restaurant.model.Client;
 import restaurant.thread.Worker;
-import restaurant.thread.fx.LoadPane;
 import restaurant.thread.fx.LoadWindow;
 
 public class AddUserDetails implements Runnable {
@@ -37,21 +37,26 @@ public class AddUserDetails implements Runnable {
     public void run() {
         ClientRepository clientRepository = ContextWrapper.getContext().getBean(ClientRepository.class);
         AddressRepository addressRepository = ContextWrapper.getContext().getBean(AddressRepository.class);
-        Client client = Session.getClient();
+
         try {
+            Client client = Session.getClient();
             client.setPhoneNumber(Long.parseLong(phone));
+            client.setName(firstName);
+            client.setLastName(lastName);
+
+            Address address = new Address(city, street, number);
+            addressRepository.save(address);
+
+            client.setAddress(address);
+            clientRepository.save(client);
+            Worker.newTask(new LoadWindow(pane, "Restauracja", "/fxml/dashboard.fxml",
+                    DraggableWindow.LARGE_WINDOW_WIDTH, DraggableWindow.LARGE_WINDOW_HEIGHT));
         } catch (NumberFormatException e) {
             Platform.runLater(() -> DraggableWindow.generateAlert(pane, "Niepoprawy numer telefonu!"));
-            return;
+        } catch (SessionNotSet ex) {
+            Worker.newTask(new LoadWindow(pane, "Restauracja", "/fxml/start.fxml",
+                    DraggableWindow.SMALL_WINDOW_WIDTH, DraggableWindow.SMALL_WINDOW_HEIGHT));
+            ex.printStackTrace();
         }
-        client.setName(firstName);
-        client.setLastName(lastName);
-
-        Address address = new Address(city, street, number);
-        addressRepository.save(address);
-
-        client.setAddress(address);
-        clientRepository.save(client);
-        Worker.newTask(new LoadWindow(pane, "Restauracja", "/fxml/dashboard.fxml", 1280, 720));
     }
 }

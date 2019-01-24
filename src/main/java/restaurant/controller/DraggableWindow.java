@@ -15,6 +15,11 @@ public class DraggableWindow implements Initializable {
     private static double x;
     private static double y;
 
+    public static final double LARGE_WINDOW_WIDTH = 1280;
+    public static final double LARGE_WINDOW_HEIGHT = 720;
+    public static final double SMALL_WINDOW_WIDTH = 480;
+    public static final double SMALL_WINDOW_HEIGHT = 640;
+
     @FXML
     protected Pane pane;
 

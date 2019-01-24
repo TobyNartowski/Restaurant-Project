@@ -3,6 +3,7 @@ package restaurant.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import restaurant.exception.SessionNotSet;
 import restaurant.misc.Session;
 import restaurant.thread.Worker;
 import restaurant.thread.db.AddUserDetails;
@@ -52,6 +53,10 @@ public class AddClientDetails extends DraggableWindow {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        headerLabel.setText("Witaj " + Session.getClient().getLogin());
+        try {
+            headerLabel.setText("Witaj " + Session.getClient().getLogin());
+        } catch (SessionNotSet e) {
+            headerLabel.setText("Witaj!");
+        }
     }
 }

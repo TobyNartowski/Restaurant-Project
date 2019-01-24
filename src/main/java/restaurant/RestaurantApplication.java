@@ -7,21 +7,18 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import restaurant.data.AddOrder;
+import restaurant.controller.DraggableWindow;
 import restaurant.data.DataManager;
-import restaurant.database.ProductRepository;
-import restaurant.database.StorageRepository;
+import restaurant.database.ClientRepository;
 import restaurant.exception.ClassIsNotEntityException;
-import restaurant.exception.EmptyClassException;
 import restaurant.misc.ContextWrapper;
-import restaurant.misc.Storage;
-import restaurant.model.*;
-
-import java.util.List;
+import restaurant.misc.Session;
+import restaurant.model.Client;
+import restaurant.model.Employee;
+import restaurant.model.Product;
 
 @SpringBootApplication
 public class RestaurantApplication extends Application {
@@ -37,14 +34,32 @@ public class RestaurantApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         System.setProperty("prism.lcdtext", "false");
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/start.fxml"));
-        Scene scene = new Scene(root, 480, 640);
+
+        // Use only for debug, login as random client to dashboard
+        ClientRepository clientRepository = ContextWrapper.getContext().getBean(ClientRepository.class);
+        Client client = clientRepository.getClientByLogin("TobyNartowski");
+        Session.setSession(client);
+
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/dashboard.fxml"));
+        Scene scene = new Scene(root, DraggableWindow.LARGE_WINDOW_WIDTH, DraggableWindow.LARGE_WINDOW_HEIGHT);
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toString());
         scene.setFill(Color.TRANSPARENT);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        /*
+        // Load start window
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/start.fxml"));
+        Scene scene = new Scene(root, DraggableWindow.SMALL_WINDOW_WIDTH, DraggableWindow.SMALL_WINDOW_HEIGHT);
+        scene.getStylesheets().add(getClass().getResource("/styles/style.css").toString());
+        scene.setFill(Color.TRANSPARENT);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.setResizable(false);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        */
     }
 
     public static void addData(ConfigurableApplicationContext ctx) {

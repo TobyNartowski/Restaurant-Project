@@ -1,5 +1,6 @@
 package restaurant.misc;
 
+import restaurant.exception.SessionNotSet;
 import restaurant.model.Client;
 
 public class Session {
@@ -10,7 +11,10 @@ public class Session {
         client = sessionClient;
     }
 
-    public static Client getClient() {
+    public static Client getClient() throws SessionNotSet {
+        if (client == null) {
+            throw new SessionNotSet();
+        }
         return client;
     }
 

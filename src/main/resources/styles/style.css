@@ -1,8 +1,8 @@
 .root {
-        -fx-background-size: 1200 900;
-        -fx-background-radius: 18;
-        -fx-border-radius: 18;
-        -fx-background-color: #f6f6f6;
+    -fx-background-size: 1200 900;
+    -fx-background-radius: 18;
+    -fx-border-radius: 18;
+    -fx-background-color: #f6f6f6;
 }
 
 .label {
@@ -59,4 +59,20 @@
     -fx-background-color: #e8e8e8;
     -fx-border-radius: 6;
     -fx-background-radius: 6;
+}
+
+.menu-button .glyph-icon {
+    -fx-fill: #4ef442;
+    -fx-padding: 200 0 0 0;
+}
+
+.menu-button-pane {
+     -fx-background-color: #e8e8e8;
+     -fx-padding: 0 0 -10 0;
+     -fx-background-radius: 18;
+     -fx-border-radius: 18;
+ }
+
+.menu-button-pane:hover .glyph-icon {
+    -fx-fill: #9bff7e;
 }

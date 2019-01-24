@@ -2,7 +2,6 @@ package restaurant.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import restaurant.thread.Worker;
 import restaurant.thread.db.RegisterUser;
 import restaurant.thread.fx.LoadPane;

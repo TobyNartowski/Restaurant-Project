@@ -1,19 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="pane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="restaurant.controller.Dashboard">
    <children>
-      <FontAwesomeIconView glyphName="TIMES" layoutX="1240.0" layoutY="39.0" onMouseReleased="#onExitClick" size="32" style="fx-fill: red;" styleClass="clickable" />
-      <Label fx:id="welcomeText" alignment="CENTER" contentDisplay="CENTER" layoutX="324.0" layoutY="328.0" prefHeight="51.0" prefWidth="635.0" text="Dashboard" textAlignment="CENTER">
+      <FontAwesomeIconView glyphName="TIMES" layoutX="1228.0" layoutY="55.0" onMouseReleased="#onExitClick" size="48" style="fx-fill: red;" styleClass="clickable" />
+      <FontAwesomeIconView glyphName="ARROW_LEFT" layoutX="14.0" layoutY="53.0" onMouseReleased="#logOut" size="42" style="fx-fill: red;" styleClass="clickable" />
+      <HBox alignment="CENTER" layoutX="160.0" layoutY="226.0" prefHeight="360.0" prefWidth="960.0" spacing="40.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="96.0" style="-fx-background-color: none;" styleClass="menu-button">
+               <children>
+                  <StackPane prefHeight="188.0" styleClass="menu-button-pane">
+                     <children>
+                        <FontAwesomeIconView glyphName="PLUS" size="96" textAlignment="CENTER" wrappingWidth="188.57142639160156" />
+                     </children>
+                  </StackPane>
+                  <Label alignment="CENTER" prefHeight="55.0" prefWidth="189.0" text="NOWE ZAMÓWIENIE" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="96.0" style="-fx-background-color: none;" styleClass="menu-button">
+               <children>
+                  <StackPane prefHeight="188.0" styleClass="menu-button-pane">
+                     <children>
+                        <FontAwesomeIconView glyphName="HISTORY" size="96" textAlignment="CENTER" wrappingWidth="188.57142639160156" />
+                     </children>
+                  </StackPane>
+                  <Label alignment="CENTER" prefHeight="55.0" prefWidth="189.0" text="HISTORIA" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="96.0" style="-fx-background-color: none;" styleClass="menu-button">
+               <children>
+                  <StackPane prefHeight="188.0" styleClass="menu-button-pane">
+                     <children>
+                        <FontAwesomeIconView glyphName="CARET_DOWN" size="96" textAlignment="CENTER" wrappingWidth="188.57142639160156" />
+                     </children>
+                  </StackPane>
+                  <Label alignment="CENTER" prefHeight="55.0" prefWidth="189.0" text="AKTUALNE ZAMÓWIENIA" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="96.0" style="-fx-background-color: none;" styleClass="menu-button">
+               <children>
+                  <StackPane prefHeight="188.0" styleClass="menu-button-pane">
+                     <children>
+                        <FontAwesomeIconView glyphName="COG" size="96" textAlignment="CENTER" wrappingWidth="188.57142639160156" />
+                     </children>
+                  </StackPane>
+                  <Label alignment="CENTER" prefHeight="55.0" prefWidth="189.0" text="USTAWIENIA" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Label fx:id="headerText" alignment="CENTER" layoutX="160.0" layoutY="134.0" prefHeight="70.0" prefWidth="960.0" text="Cześć Tobiasz!" textAlignment="CENTER">
          <font>
-            <Font size="35.0" />
+            <Font size="48.0" />
          </font>
       </Label>
-      <Button layoutX="614.0" layoutY="386.0" mnemonicParsing="false" onAction="#logOut" text="Logout" />
+      <Label fx:id="subtitleText" alignment="CENTER" layoutX="160.0" layoutY="197.0" prefHeight="40.0" prefWidth="960.0" text="Na co masz dzisiaj ochotę?" textAlignment="CENTER">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

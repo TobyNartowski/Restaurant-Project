@@ -1,3 +1,2 @@
 -- TODO FILE --
-save storage !
 spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true
