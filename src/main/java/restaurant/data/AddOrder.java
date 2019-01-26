@@ -21,7 +21,7 @@ public class AddOrder {
     private AddressRepository addressRepository;
     private Order order;
     private Order.Type type;
-    private Map<Product, Integer> productList = new HashMap<>();
+    private List<Product> productList = new LinkedList<>();
     private Map<String, Integer> ingredientList;
     private ProductRepository productRepository;
     private List<String> productNames = new LinkedList<>();
@@ -109,7 +109,7 @@ public class AddOrder {
         List<Product> products = productRepository.findAll();
         for (int i = 0; i < products.size(); i++) {
             if(products.get(i).getName() == productName) {
-                productList.put(products.get(i), 1);
+                productList.add(products.get(i));
 //                for (int j = 0; j < productList.get(productName); j++) {
 //                }
             }

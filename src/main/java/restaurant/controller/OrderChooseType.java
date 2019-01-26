@@ -13,7 +13,7 @@ import restaurant.thread.fx.LoadPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ChooseOrderType extends DraggableWindow {
+public class OrderChooseType extends DraggableWindow {
 
     @FXML
     private ImageView deliveryImage;
@@ -30,13 +30,13 @@ public class ChooseOrderType extends DraggableWindow {
     @FXML
     private void onDeliveryClick() {
         Builder.getBuilder().newOrder(Order.Type.DELIVERY);
-        Worker.newTask(new LoadPane(pane, "/fxml/add_order.fxml"));
+        Worker.newTask(new LoadPane(pane, "/fxml/order_add_products.fxml"));
     }
 
     @FXML
     private void onRestaurantClick() {
         Builder.getBuilder().newOrder(Order.Type.RESTAURANT);
-        Worker.newTask(new LoadPane(pane, "/fxml/add_order.fxml"));
+        Worker.newTask(new LoadPane(pane, "/fxml/order_add_products.fxml"));
     }
 
     @FXML

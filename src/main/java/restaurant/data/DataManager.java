@@ -142,72 +142,72 @@ public class DataManager {
 
     @Dummy(dependency = {Ingredient.class})
     private static Product[] dummyProduct = {
-            new Product("Margherita Pizza", 22000, Arrays.asList(
+            new Product("Margherita Pizza", 2200, Arrays.asList(
                     getIngredient("Dough"), getIngredient("Tomato sauce"),
                     getIngredient("Mozzarella"), getIngredient("Oregano")
             )),
-            new Product("Salami Pizza", 34000, Arrays.asList(
+            new Product("Salami Pizza", 2700, Arrays.asList(
                     getIngredient("Tomato sauce"), getIngredient("Mozzarella"),
                     getIngredient("Salami")
             )),
-            new Product("Dracula", 29000, Arrays.asList(
+            new Product("Dracula", 2900, Arrays.asList(
                     getIngredient("Tomato sauce"), getIngredient("Onion"),
                     getIngredient("Ham"), getIngredient("Mushrooms"),
                     getIngredient("Oregano"), getIngredient("Bacon")
             )),
-            new Product("Mexican Pizza", 27000, Arrays.asList(
+            new Product("Mexican Pizza", 2700, Arrays.asList(
                     getIngredient("Dough"), getIngredient("Tomato sauce"),
                     getIngredient("Mozzarella"), getIngredient("Oregano"),
                     getIngredient("Peppers"), getIngredient("Beef"),
                     getIngredient("Corn")
             )),
-            new Product("Italian Pizza", 26500, Arrays.asList(
+            new Product("Italian Pizza", 2650, Arrays.asList(
                     getIngredient("Dough"), getIngredient("Tomato sauce"),
                     getIngredient("Mozzarella"), getIngredient("Oregano"),
                     getIngredient("Bacon"), getIngredient("Onion"),
                     getIngredient("Olives")
             )),
-            new Product("Spanish Pizza", 26000, Arrays.asList(
+            new Product("Spanish Pizza", 2600, Arrays.asList(
                     getIngredient("Dough"), getIngredient("Tomato sauce"),
                     getIngredient("Mozzarella"), getIngredient("Oregano"),
                     getIngredient("Mushrooms"), getIngredient("Salami"),
                     getIngredient("Tomato")
             )),
-            new Product("Carbonara Pizza", 25000, Arrays.asList(
+            new Product("Carbonara Pizza", 2500, Arrays.asList(
                     getIngredient("Dough"), getIngredient("Sour Cream"),
                     getIngredient("Mozzarella"), getIngredient("Onion"),
                     getIngredient("Bacon")
             )),
-            new Product("Meat Pizza", 28500, Arrays.asList(
+            new Product("Meat Pizza", 2850, Arrays.asList(
                     getIngredient("Dough"), getIngredient("Tomato sauce"),
                     getIngredient("Mozzarella"), getIngredient("Oregano"),
                     getIngredient("Ham"), getIngredient("Chicken"),
                     getIngredient("Beef")
             )),
-            new Product("Arabic Pizza", 26000, Arrays.asList(
+            new Product("Arabic Pizza", 2600, Arrays.asList(
                     getIngredient("Dough"), getIngredient("Tomato sauce"),
                     getIngredient("Mozzarella"), getIngredient("Oregano"),
                     getIngredient("Tomato"), getIngredient("Spinach"),
                     getIngredient("Chicken")
             )),
-            new Product("Vegetarian Pizza", 34000, Arrays.asList(
+            new Product("Vegetarian Pizza", 3400, Arrays.asList(
                     getIngredient("Dough"), getIngredient("Tomato sauce"),
                     getIngredient("Mozzarella"), getIngredient("Mushrooms"),
                     getIngredient("Oregano"), getIngredient("Peppers"),
                     getIngredient("Corn")
             )),
-            new Product("Burger", 18000, Arrays.asList(
+            new Product("Burger", 1800, Arrays.asList(
                     getIngredient("Bun"), getIngredient("Beef"),
                     getIngredient("Tomato"), getIngredient("Mayonese"),
                     getIngredient("Cheese"), getIngredient("Ham")
             )),
-            new Product("Burger hot cheese bacon", 25000, Arrays.asList(
+            new Product("Burger hot cheese bacon", 2500, Arrays.asList(
                     getIngredient("Bun"), getIngredient("Lettuce"),
                     getIngredient("Rucola"), getIngredient("Cucumber"),
                     getIngredient("Bacon"), getIngredient("Red Onion"),
                     getIngredient("BBQ sauce"), getIngredient("Cheese")
             )),
-            new Product("Hawaiian Burger", 19000, Arrays.asList(
+            new Product("Hawaiian Burger", 1900, Arrays.asList(
                     getIngredient("Bun"), getIngredient("Beef"),
                     getIngredient("Lettuce"), getIngredient("Cucumber"),
                     getIngredient("Pineapple"), getIngredient("Bacon"),
@@ -262,9 +262,9 @@ public class DataManager {
         order.setStatus(Order.Status.UTWORZONE);
         order.setType(Order.Type.RESTAURANT);
         order.setClientList(Arrays.asList(client));
-        Map<Product, Integer> productList = new HashMap<>();
-        productList.put(DataManager.getProduct(3), 44);
-        productList.put(DataManager.getProduct(5), 15);
+        List<Product> productList = new LinkedList<>();
+        productList.add(DataManager.getProduct(3));
+        productList.add(DataManager.getProduct(5));
         order.setProductList(productList);
 
         orderRepository.save(order);

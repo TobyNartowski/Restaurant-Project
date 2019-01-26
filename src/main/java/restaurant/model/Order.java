@@ -60,7 +60,7 @@ public class Order implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
     @ElementCollection
-        private Map<Product, Integer> productList = new HashMap<>();
+        private List<Product> productList = new LinkedList<>();
     @Enumerated(EnumType.STRING)
         private Status status;
     @Enumerated(EnumType.STRING)
@@ -94,12 +94,12 @@ public class Order implements Cloneable {
         return instance;
     }
 
-    public void addProduct(Product product, int amount) {
-        productList.put(product, amount);
+    public void addProduct(Product product) {
+        productList.add(product);
     }
 
-    public boolean deleteProduct(int id, int amount) {
-        return false;
+    public void removeProduct(Product product) {
+        productList.remove(product);
     }
 
     public Type getType() {
@@ -134,11 +134,11 @@ public class Order implements Cloneable {
         return null;
     }
 
-    public Map<Product, Integer> getProductList() {
+    public List<Product> getProductList() {
         return productList;
     }
 
-    public void setProductList(Map<Product, Integer> productList) {
+    public void setProductList(List<Product> productList) {
         this.productList = productList;
     }
 
@@ -186,6 +186,14 @@ public class Order implements Cloneable {
         this.table = table;
     }
 
+    public long getTotal() {
+        long totalPrice = 0L;
+        for (Product product : productList) {
+            totalPrice += product.getPrice();
+        }
+        return totalPrice;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -194,8 +202,8 @@ public class Order implements Cloneable {
         } else {
             stringBuilder.append("-- Zamówienie do restauracji --\n");
         }
-        for (Map.Entry<Product, Integer> entry : productList.entrySet()) {
-            stringBuilder.append(entry.getKey()).append("\n");
+        for (Product x : productList) {
+            stringBuilder.append(x).append("\n");
         }
         return stringBuilder.toString();
     }

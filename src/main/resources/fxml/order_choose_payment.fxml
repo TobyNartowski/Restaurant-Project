@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="pane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="restaurant.controller.OrderChoosePayment">
+   <children>
+      <FontAwesomeIconView glyphName="TIMES" layoutX="1228.0" layoutY="55.0" onMouseReleased="#onExitClick" size="48" styleClass="clickable" />
+      <FontAwesomeIconView glyphName="ARROW_LEFT" layoutX="14.0" layoutY="53.0" onMouseReleased="#onBackClick" size="42" styleClass="clickable" />
+      <Label layoutX="617.0" layoutY="352.0" text="payment" />
+   </children>
+</AnchorPane>

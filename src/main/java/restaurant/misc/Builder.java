@@ -3,6 +3,7 @@ package restaurant.misc;
 import restaurant.exception.OrderEmptyFieldException;
 import restaurant.model.*;
 
+import java.util.List;
 import java.util.Map;
 
 public class Builder {
@@ -23,12 +24,20 @@ public class Builder {
         order.setType(type);
     }
 
-    public void addProduct(Product product, int amount) {
-        order.addProduct(product, amount);
+    public void addProduct(Product product) {
+        order.addProduct(product);
     }
 
-    public void addProductList(Map<Product, Integer> products) {
+    public void removeProduct(Product product) {
+        order.removeProduct(product);
+    }
+
+    public void addProductList(List<Product> products) {
         order.setProductList(products);
+    }
+
+    public List<Product> getProductList() {
+        return order.getProductList();
     }
 
     public void addOrderNote(String note) {
@@ -51,6 +60,13 @@ public class Builder {
         order.setTable(table);
     }
 
+    public String getOrderTotal() {
+        return Money.convertToString(order.getTotal());
+    }
+
+    public Order.Type getOrderType() {
+        return order.getType();
+    }
 
     public Order build() throws OrderEmptyFieldException {
         if (order.getProductList().isEmpty()) {

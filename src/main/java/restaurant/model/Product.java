@@ -10,9 +10,9 @@ public class Product {
 
     @Id
     @GeneratedValue
-        private Long id;
+    protected Long id;
     @ManyToMany(fetch = FetchType.EAGER)
-        protected List<Ingredient> ingredientList = new ArrayList<>();
+    protected List<Ingredient> ingredientList = new ArrayList<>();
     protected String name;
     protected long price;
 
@@ -62,6 +62,20 @@ public class Product {
 
     public boolean removeIngredient(Ingredient ingredient) {
         return ingredientList.remove(ingredient);
+    }
+
+    public String getDescription() {
+        StringBuilder stringBuilder = new StringBuilder();
+        boolean leastOne = false;
+        for (Ingredient ingredient : ingredientList) {
+            stringBuilder.append(ingredient).append(", ");
+            leastOne = true;
+        }
+        if (leastOne) {
+            stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
+        }
+
+        return stringBuilder.toString();
     }
 
     @Override

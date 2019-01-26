@@ -26,8 +26,7 @@ import restaurant.model.Product;
 public class RestaurantApplication extends Application {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext ctx =
-                SpringApplication.run(RestaurantApplication.class, args);
+        ConfigurableApplicationContext ctx = SpringApplication.run(RestaurantApplication.class, args);
         ContextWrapper.initWrapper(ctx);
         launch(args);
         ctx.close();
@@ -51,20 +50,18 @@ public class RestaurantApplication extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        /*
         // Load start window
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/start.fxml"));
-        Scene scene = new Scene(root, DraggableWindow.SMALL_WINDOW_WIDTH, DraggableWindow.SMALL_WINDOW_HEIGHT);
-        scene.getStylesheets().add(getClass().getResource("/styles/style.css").toString());
-        scene.setFill(Color.TRANSPARENT);
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setResizable(false);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        */
+//        Parent root = FXMLLoader.load(getClass().getResource("/fxml/start.fxml"));
+//        Scene scene = new Scene(root, DraggableWindow.SMALL_WINDOW_WIDTH, DraggableWindow.SMALL_WINDOW_HEIGHT);
+//        scene.getStylesheets().add(getClass().getResource("/styles/style.css").toString());
+//        scene.setFill(Color.TRANSPARENT);
+//        primaryStage.initStyle(StageStyle.TRANSPARENT);
+//        primaryStage.setResizable(false);
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
     }
 
-    private void loadDatabaseWithDummyData(ApplicationContext context) {
+    private static void loadDatabaseWithDummyData(ApplicationContext context) {
         DataManager dataManager = new DataManager(context);
         try {
             dataManager.addDummyData(Ingredient.class);
