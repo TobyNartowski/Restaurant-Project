@@ -30,12 +30,6 @@ public class Start extends DraggableWindow {
         onLoginClick();
     }
 
-    private void centerStage(Stage stage, double width, double height) {
-        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX((screenBounds.getWidth() - width) / 2);
-        stage.setY((screenBounds.getHeight() - height) / 2);
-    }
-
     @FXML
     private void onRegisterClick() {
         Worker.newTask(new LoadPane(pane, "/fxml/register.fxml"));

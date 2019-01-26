@@ -53,7 +53,10 @@ public class Builder {
             throw new IllegalStateException("Restaurant order cannot have a delivery address");
         }
         order.setDeliveryAddress(address);
+    }
 
+    public void addCustomPhoneNumber(Long number) {
+        order.setCustomPhoneNumber(number);
     }
 
     public void addReservation(Reservation table) {
@@ -66,6 +69,14 @@ public class Builder {
 
     public Order.Type getOrderType() {
         return order.getType();
+    }
+
+    public Address getDeliveryAddress() {
+        return order.getDeliveryAddress();
+    }
+
+    public Long getCustomPhoneNumber() {
+        return order.getCustomPhoneNumber();
     }
 
     public Order build() throws OrderEmptyFieldException {

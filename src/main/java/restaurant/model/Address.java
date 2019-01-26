@@ -44,7 +44,7 @@ public class Address {
         this.street = street;
     }
 
-    public String getNumer() {
+    public String getNumber() {
         return number;
     }
 

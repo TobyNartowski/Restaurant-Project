@@ -53,10 +53,12 @@ public class OrderAddProducts extends DraggableWindow {
         productCount.setText(Long.toString(productCounterArray[Math.toIntExact(productId - 1)]));
         totalLabel.setText("TWOJE ZAMÓWIENIE: " + Builder.getBuilder().getOrderTotal());
 
+        System.out.println("Update: " + emptyCounter);
         if (emptyCounter == 0) {
             nextButton.setDisable(true);
             nextButton.getStyleClass().add("clickable-disabled");
         } else {
+            System.out.println("Enabling: " + emptyCounter);
             nextButton.setDisable(false);
             nextButton.getStyleClass().remove("clickable-disabled");
         }
@@ -134,9 +136,6 @@ public class OrderAddProducts extends DraggableWindow {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setDraggingEvents();
-
-        nextButton.setDisable(true);
-        nextButton.getStyleClass().add("clickable-disabled");
 
         ProductRepository productRepository = ContextWrapper.getContext().getBean(ProductRepository.class);
         List<Product> productList = productRepository.findAll();

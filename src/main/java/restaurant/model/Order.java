@@ -79,6 +79,7 @@ public class Order implements Cloneable {
         private Employee employee;
     private boolean payment = false;
     private String note;
+    private Long customPhoneNumber;
 
     public Order() {}
 
@@ -189,6 +190,14 @@ public class Order implements Cloneable {
 
     public void setTable(Reservation table) {
         this.table = table;
+    }
+
+    public Long getCustomPhoneNumber() {
+        return customPhoneNumber;
+    }
+
+    public void setCustomPhoneNumber(long customPhoneNumber) {
+        this.customPhoneNumber = customPhoneNumber;
     }
 
     public long getTotal() {
