@@ -22,9 +22,9 @@ public class Storage {
         return instance;
     }
 
-    public Map<String, Integer> loadIngredientsFromDatabase(StorageRepository storageRepository) {
-        List<StorageEntity> listIngredient = new LinkedList<>();
-        listIngredient = storageRepository.findAll();
+    public Map<String, Integer> loadIngredients() {
+        StorageRepository storageRepository = ContextWrapper.getContext().getBean(StorageRepository.class);
+        List<StorageEntity> listIngredient = storageRepository.findAll();
 
         for (int i = 0; i < listIngredient.size(); i++) {
             System.out.println(i + "  " + listIngredient.get(i).getIngredient() + "  " + listIngredient.get(i).getQuantity());
@@ -33,10 +33,12 @@ public class Storage {
         return this.ingredientList;
     }
 
-    public void saveIngredientsInDatabase(StorageRepository repository, IngredientRepository ingredients) {
-        List<Ingredient> keys = ingredients.findAll();
+    public void saveIngredientsInDatabase() {
+        StorageRepository storageRepository = ContextWrapper.getContext().getBean(StorageRepository.class);
+        IngredientRepository ingredientRepository = ContextWrapper.getContext().getBean(IngredientRepository.class);
+        List<Ingredient> keys = ingredientRepository.findAll();
         for (int i = 0; i < ingredientList.size(); i++) {
-            repository.save(new StorageEntity(keys.get(i), ingredientList.get(keys.get(i).getName())));
+            storageRepository.save(new StorageEntity(keys.get(i), ingredientList.get(keys.get(i).getName())));
         }
     }
 

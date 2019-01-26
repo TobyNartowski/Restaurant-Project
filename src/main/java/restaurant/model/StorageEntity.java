@@ -8,9 +8,9 @@ public class StorageEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+    private Long id;
     @ManyToOne
-        private Ingredient ingredient;
+    private Ingredient ingredient;
     private Integer quantity;
 
     public StorageEntity() {}

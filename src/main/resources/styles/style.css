@@ -76,3 +76,30 @@
 .menu-button-pane:hover .glyph-icon {
     -fx-fill: #9bff7e;
 }
+
+
+.white-clickable {
+    -fx-fill: #ffffff;
+    -fx-text-fill: #ffffff;
+}
+
+.white-clickable:hover {
+    -fx-fill: #4ef442;
+    -fx-text-fill: #4ef442;
+}
+
+.img-text {
+    -fx-text-fill: white;
+}
+
+.scroll-pane:focused {
+    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5, 4, 3;
+}
+
+.order-item {
+    -fx-background-color: #e8e8e8;
+    -fx-background-radius: 36;
+    -fx-border-radius: 36
+}

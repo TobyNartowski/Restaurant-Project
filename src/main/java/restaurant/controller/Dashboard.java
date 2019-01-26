@@ -2,9 +2,11 @@ package restaurant.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import org.hibernate.jdbc.Work;
 import restaurant.exception.SessionNotSet;
 import restaurant.misc.Session;
 import restaurant.thread.Worker;
+import restaurant.thread.fx.LoadPane;
 import restaurant.thread.fx.LoadWindow;
 
 import java.net.URL;
@@ -18,6 +20,11 @@ public class Dashboard extends DraggableWindow {
 
     @FXML
     private Label subtitleText;
+
+    @FXML
+    private void onAddOrderClick() {
+        Worker.newTask(new LoadPane(pane, "/fxml/choose_order_type.fxml"));
+    }
 
     @FXML
     private void logOut() {

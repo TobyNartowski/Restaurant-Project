@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="restaurant.controller.ChooseOrderType">
+   <children>
+      <HBox prefHeight="720.0" prefWidth="1280.0">
+         <children>
+            <StackPane fx:id="deliveryPane" onMouseReleased="#onDeliveryClick" prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="deliveryImage" fitHeight="720.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label alignment="CENTER" prefHeight="55.0" prefWidth="189.0" styleClass="img-text" text="NA WYNOS" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets top="20.0" />
+                     </StackPane.margin>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane fx:id="restaurantPane" onMouseReleased="#onRestaurantClick" prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="restaurantImage" fitHeight="720.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label alignment="CENTER" prefHeight="55.0" prefWidth="362.0" styleClass="img-text" text="DO RESTAURACJI" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+         </children>
+      </HBox>
+      <FontAwesomeIconView glyphName="TIMES" layoutX="1228.0" layoutY="55.0" onMouseReleased="#onExitClick" size="48" styleClass="white-clickable" />
+      <FontAwesomeIconView glyphName="ARROW_LEFT" layoutX="14.0" layoutY="53.0" onMouseReleased="#onBackClick" size="42" styleClass="white-clickable" />
+   </children>
+</AnchorPane>

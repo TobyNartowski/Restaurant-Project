@@ -30,7 +30,7 @@ public class DataManager {
         IngredientRepository ingredientRepository = context.getBean(IngredientRepository.class);
         List<String> ingredients = ingredientRepository.getAllIngredients();
         Map<String, Integer> ingredientList = new HashMap<>();
-        ingredients.forEach((x) -> ingredientList.put(x, random.nextInt(101)));
+        ingredients.forEach((x) -> ingredientList.put(x, random.nextInt(101) + 10));
         Storage.getInstance().setIngredientList(ingredientList);
     }
 

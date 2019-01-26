@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import restaurant.controller.DraggableWindow;
 import restaurant.data.DataManager;
@@ -16,8 +17,9 @@ import restaurant.database.ClientRepository;
 import restaurant.exception.ClassIsNotEntityException;
 import restaurant.misc.ContextWrapper;
 import restaurant.misc.Session;
+import restaurant.misc.Storage;
 import restaurant.model.Client;
-import restaurant.model.Employee;
+import restaurant.model.Ingredient;
 import restaurant.model.Product;
 
 @SpringBootApplication
@@ -62,13 +64,13 @@ public class RestaurantApplication extends Application {
         */
     }
 
-    public static void addData(ConfigurableApplicationContext ctx) {
+    private void loadDatabaseWithDummyData(ApplicationContext context) {
+        DataManager dataManager = new DataManager(context);
         try {
-            DataManager dataManager = new DataManager(ctx);
-            dataManager.addDummyData(Client.class);
+            dataManager.addDummyData(Ingredient.class);
             dataManager.addDummyData(Product.class);
-            dataManager.addDummyData(Employee.class);
             dataManager.loadStorage();
+            Storage.getInstance().saveIngredientsInDatabase();
         } catch (ClassIsNotEntityException e) {
             e.printStackTrace();
         }
