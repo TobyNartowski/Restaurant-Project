@@ -28,8 +28,8 @@ public class Builder {
         order.addProduct(product);
     }
 
-    public void removeProduct(Product product) {
-        order.removeProduct(product);
+    public void removeProduct(Long productId) {
+        order.removeProduct(productId);
     }
 
     public void addProductList(List<Product> products) {

@@ -97,6 +97,15 @@ public class OrderAddProducts extends DraggableWindow {
         productMinus.getStyleClass().add("clickable");
         productMinus.getStyleClass().add("clickable-disabled");
 
+        long alreadyAddedCount = Builder.getBuilder().getProductList().stream().filter(i -> i.getId().equals(product.getId())).count();
+        for (int i = 0; i < alreadyAddedCount; i++) {
+            productCounterArray[Math.toIntExact(product.getId() - 1)]++;
+            emptyCounter++;
+            productMinus.setDisable(false);
+            productMinus.getStyleClass().remove("clickable-disabled");
+        }
+        updateProductStatus(productCount, product.getId());
+
         productPlus.setOnMouseReleased((MouseEvent) -> {
             Builder.getBuilder().addProduct(product);
             productCounterArray[Math.toIntExact(product.getId() - 1)]++;
@@ -107,7 +116,7 @@ public class OrderAddProducts extends DraggableWindow {
         });
 
         productMinus.setOnMouseReleased((MouseEvent) -> {
-            Builder.getBuilder().removeProduct(product);
+            Builder.getBuilder().removeProduct(product.getId());
             productCounterArray[Math.toIntExact(product.getId() - 1)]--;
             emptyCounter--;
             updateProductStatus(productCount, product.getId());

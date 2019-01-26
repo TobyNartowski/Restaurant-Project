@@ -98,8 +98,13 @@ public class Order implements Cloneable {
         productList.add(product);
     }
 
-    public void removeProduct(Product product) {
-        productList.remove(product);
+    public void removeProduct(Long longId) {
+        for (Product product : productList) {
+            if (product.getId().equals(longId)) {
+                productList.remove(product);
+                return;
+            }
+        }
     }
 
     public Type getType() {
