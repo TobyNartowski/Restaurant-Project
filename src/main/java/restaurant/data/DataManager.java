@@ -230,11 +230,11 @@ public class DataManager {
             new Product("Apple juice 1l", 350, Arrays.asList())
     };
 
-    @Dummy
+    @Dummy(dependency = {Address.class})
     private static Employee[] dummyEmployee = {
             new Employee("Angelika", "Sobczak", dummyAddress[random.nextInt(dummyAddress.length)],
                     random.nextInt(899999999) + 100000000L, Employee.Type.WAITER),
-            new Employee("Marian", "Wysocki", dummyAddress[random.nextInt(dummyAddress.length)],
+            new Employee("Michał", "Młodawski", dummyAddress[random.nextInt(dummyAddress.length)],
                     random.nextInt(899999999) + 100000000L, Employee.Type.COOK),
             new Employee("Gerwazy", "Grabowski", dummyAddress[random.nextInt(dummyAddress.length)],
                     random.nextInt(899999999) + 100000000L, Employee.Type.SUPPLIER),

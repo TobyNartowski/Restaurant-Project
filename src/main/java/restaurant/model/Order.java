@@ -60,7 +60,7 @@ public class Order implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
     @ElementCollection
-        private List<Product> productList = new LinkedList<>();
+        private List<Product> productList = new ArrayList<>();
     @Enumerated(EnumType.STRING)
         private Status status;
     @Enumerated(EnumType.STRING)

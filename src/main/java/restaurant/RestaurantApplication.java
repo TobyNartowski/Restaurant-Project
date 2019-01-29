@@ -13,7 +13,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import restaurant.controller.DraggableWindow;
 import restaurant.data.DataManager;
-import restaurant.data.OrderAdder;
 import restaurant.database.ClientRepository;
 import restaurant.exception.ClassIsNotEntityException;
 import restaurant.misc.ContextWrapper;
@@ -30,8 +29,7 @@ public class RestaurantApplication extends Application {
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx = SpringApplication.run(RestaurantApplication.class, args);
         ContextWrapper.initWrapper(ctx);
-
-        //launch(args);
+        launch(args);
         ctx.close();
     }
 
@@ -69,6 +67,7 @@ public class RestaurantApplication extends Application {
         try {
             dataManager.addDummyData(Ingredient.class);
             dataManager.addDummyData(Product.class);
+            dataManager.addDummyData(Employee.class);
             dataManager.loadStorage();
             Storage.getInstance().saveIngredientsInDatabase();
         } catch (ClassIsNotEntityException e) {

@@ -41,13 +41,17 @@ public class UpdateUser implements Runnable {
 
         try {
             Long addressId;
+            Address address = new Address(city, street, number);
             if ((addressId = addressRepository.findId(city, street, number)) == null) {
-                Address address = new Address(city, street, number);
                 addressRepository.save(address);
                addressId = address.getId();
             }
-            clientRepository.updateClient(lastName, firstName, Long.parseLong(phone),
-                    BigInteger.valueOf(addressId), Session.getClient().getId());
+            try {
+                clientRepository.updateClient(lastName, firstName, Long.parseLong(phone),
+                        BigInteger.valueOf(addressId), Session.getClient().getId());
+            } catch (Exception e) {} finally {
+                Session.setSession(clientRepository.getOne(Session.getClient().getId()));
+            }
             Worker.newTask(new LoadPane(pane, "/fxml/dashboard.fxml"));
         } catch (SessionNotSet sessionNotSet) {
             throw new IllegalStateException();

@@ -1,10 +1,13 @@
 package restaurant.misc;
 
+import restaurant.database.EmployeeRepository;
 import restaurant.exception.OrderEmptyFieldException;
+import restaurant.exception.SessionNotSet;
 import restaurant.model.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class Builder {
 
@@ -90,6 +93,20 @@ public class Builder {
     public Order build() throws OrderEmptyFieldException {
         if (order.getProductList().isEmpty()) {
             throw new OrderEmptyFieldException();
+        }
+
+        PurchaseProof proof = new PurchaseProof();
+        proof.setType(PurchaseProof.PurchaseType.BILL);
+        order.setPurchaseProof(proof);
+        Employee employee = ContextWrapper.getContext().getBean(EmployeeRepository.class).getOne(1L);
+        order.setEmployee(employee);
+
+        if (order.getType() == Order.Type.RESTAURANT) {
+            try {
+                order.setTable(new Reservation(new Random().nextInt(20), 1, Session.getClient()));
+            } catch (SessionNotSet sessionNotSet) {
+                throw new IllegalStateException();
+            }
         }
 
         order.setStatus(Order.Status.UTWORZONE);

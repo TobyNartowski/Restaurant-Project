@@ -6,8 +6,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import restaurant.data.OrderAdder;
-import restaurant.exception.EmptyClassException;
+import restaurant.database.AddressRepository;
+import restaurant.database.OrderRepository;
 import restaurant.exception.OrderEmptyFieldException;
 import restaurant.misc.Builder;
 import restaurant.misc.ContextWrapper;
@@ -15,7 +15,6 @@ import restaurant.misc.Money;
 import restaurant.model.Address;
 import restaurant.model.Order;
 import restaurant.model.Product;
-import restaurant.model.PurchaseProof;
 import restaurant.thread.Worker;
 import restaurant.thread.fx.LoadPane;
 
@@ -39,24 +38,20 @@ public class OrderAddNote extends DraggableWindow {
     private void onNextClick() {
         try {
             Order order = Builder.getBuilder().build();
-            OrderAdder orderAdder = new OrderAdder(ContextWrapper.getContext());
 
-            try {
-                //default BILL
-                orderAdder.setProof(PurchaseProof.PurchaseType.BILL);
-                orderAdder.setEmployee(1L);//id 1 = waiter
-
-                orderAdder.setReservation();
-
-                orderAdder.addBuilder(order);
-
-                orderAdder.addOrder();
-
-            } catch (EmptyClassException e) {
-                e.printStackTrace();
-                //error pane or sth
+            if (order.getType() == Order.Type.DELIVERY) {
+                AddressRepository addressRepository = ContextWrapper.getContext().getBean(AddressRepository.class);
+                Address address = order.getDeliveryAddress();
+                Long id;
+                if ((id = addressRepository.findId(address.getCity(), address.getStreet(), address.getStreet())) != null) {
+                    order.setDeliveryAddress(addressRepository.getOne(id));
+                } else {
+                    addressRepository.save(address);
+                }
             }
-            // TODO: TUTAJ DODAJ ZAMÓWIENIE DO BAZY
+
+            OrderRepository orderRepository = ContextWrapper.getContext().getBean(OrderRepository.class);
+            orderRepository.save(order);
         } catch (OrderEmptyFieldException e) {
             generateAlert(pane, "Błąd zamówienia!");
             throw new IllegalStateException();
