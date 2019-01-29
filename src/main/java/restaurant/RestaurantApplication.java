@@ -37,28 +37,29 @@ public class RestaurantApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         System.setProperty("prism.lcdtext", "false");
 
-//        // Use only for debug, login as random client to dashboard
-//        ClientRepository clientRepository = ContextWrapper.getContext().getBean(ClientRepository.class);
-//        Client client = clientRepository.getClientByLogin("TobyNartowski");
-//        Session.setSession(client);
-//
-//        Parent root = FXMLLoader.load(getClass().getResource("/fxml/dashboard.fxml"));
-//        Scene scene = new Scene(root, DraggableWindow.LARGE_WINDOW_WIDTH, DraggableWindow.LARGE_WINDOW_HEIGHT);
-//        scene.getStylesheets().add(getClass().getResource("/styles/style.css").toString());
-//        scene.setFill(Color.TRANSPARENT);
-//        primaryStage.initStyle(StageStyle.TRANSPARENT);
-//        primaryStage.setResizable(false);
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
+        // Use only for debug, login as random client to dashboard
+        ClientRepository clientRepository = ContextWrapper.getContext().getBean(ClientRepository.class);
+        Client client = clientRepository.getClientByLogin("TobyNartowski");
+        Session.setSession(client);
 
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/start.fxml"));
-        Scene scene = new Scene(root, DraggableWindow.SMALL_WINDOW_WIDTH, DraggableWindow.SMALL_WINDOW_HEIGHT);
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/dashboard.fxml"));
+        Scene scene = new Scene(root, DraggableWindow.LARGE_WINDOW_WIDTH, DraggableWindow.LARGE_WINDOW_HEIGHT);
         scene.getStylesheets().add(getClass().getResource("/styles/style.css").toString());
         scene.setFill(Color.TRANSPARENT);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+//         Load start window
+//        Parent root = FXMLLoader.load(getClass().getResource("/fxml/start.fxml"));
+//        Scene scene = new Scene(root, DraggableWindow.SMALL_WINDOW_WIDTH, DraggableWindow.SMALL_WINDOW_HEIGHT);
+//        scene.getStylesheets().add(getClass().getResource("/styles/style.css").toString());
+//        scene.setFill(Color.TRANSPARENT);
+//        primaryStage.initStyle(StageStyle.TRANSPARENT);
+//        primaryStage.setResizable(false);
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
     }
 
     private static void loadDatabaseWithDummyData(ApplicationContext context) {
@@ -68,6 +69,7 @@ public class RestaurantApplication extends Application {
             dataManager.addDummyData(Product.class);
             dataManager.addDummyData(Employee.class);
             dataManager.loadStorage();
+            dataManager.generateFinishedOrders();
             Storage.getInstance().saveIngredientsInDatabase();
         } catch (ClassIsNotEntityException e) {
             e.printStackTrace();

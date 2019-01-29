@@ -1,5 +1,6 @@
 package restaurant.model;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -9,11 +10,8 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToMany
-    @JoinTable(name = "client_orders",
-        joinColumns = {@JoinColumn(name = "client_id", referencedColumnName = "id")},
-        inverseJoinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "id")})
-    private List<Order> orderList;
+    @ManyToMany(mappedBy = "clientList")
+    private List<Order> orderList = new ArrayList<>();
     @OneToOne
     private Address address;
     @OneToOne(cascade = CascadeType.PERSIST)
@@ -90,7 +88,7 @@ public class Client {
     }
 
     public List<Order> getOrderList() {
-        return null;
+        return orderList;
     }
 
     public int getDiscount() {
@@ -113,11 +111,13 @@ public class Client {
         return hash;
     }
 
-    public void reserve(int tableNumber, int people) {
-
-    }
+    public void reserve(int tableNumber, int people) { }
 
     public void setOrderList(List<Order> orderList) {
         this.orderList = orderList;
+    }
+
+    public void addOrder(Order order) {
+        orderList.add(order);
     }
 }

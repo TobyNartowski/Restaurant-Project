@@ -1,5 +1,6 @@
 package restaurant.controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import restaurant.exception.SessionNotSet;
@@ -23,6 +24,19 @@ public class Dashboard extends DraggableWindow {
     @FXML
     private void onAddOrderClick() {
         Worker.newTask(new LoadPane(pane, "/fxml/order_choose_type.fxml"));
+    }
+
+    @FXML
+    private void onHistoryClick() {
+        try {
+            if (Session.getClient().getOrderList().isEmpty()) {
+                 Platform.runLater(() -> generateAlert(pane, "Brak zamówień!"));
+            } else {
+                Worker.newTask(new LoadPane(pane, "/fxml/history.fxml"));
+            }
+        } catch (SessionNotSet sessionNotSet) {
+            sessionNotSet.printStackTrace();
+        }
     }
 
     @FXML

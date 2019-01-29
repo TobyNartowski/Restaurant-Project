@@ -105,7 +105,7 @@ public class Builder {
             try {
                 order.setTable(new Reservation(new Random().nextInt(20), 1, Session.getClient()));
             } catch (SessionNotSet sessionNotSet) {
-                throw new IllegalStateException();
+                order.setTable(new Reservation(new Random().nextInt(20), 1, null));
             }
         }
 

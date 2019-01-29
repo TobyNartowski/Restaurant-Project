@@ -9,9 +9,11 @@ import javafx.scene.layout.VBox;
 import restaurant.database.AddressRepository;
 import restaurant.database.OrderRepository;
 import restaurant.exception.OrderEmptyFieldException;
+import restaurant.exception.SessionNotSet;
 import restaurant.misc.Builder;
 import restaurant.misc.ContextWrapper;
 import restaurant.misc.Money;
+import restaurant.misc.Session;
 import restaurant.model.Address;
 import restaurant.model.Order;
 import restaurant.model.Product;
@@ -19,6 +21,7 @@ import restaurant.thread.Worker;
 import restaurant.thread.fx.LoadPane;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class OrderAddNote extends DraggableWindow {
@@ -50,10 +53,14 @@ public class OrderAddNote extends DraggableWindow {
                 }
             }
 
+            order.setClientList(Arrays.asList(Session.getClient()));
             OrderRepository orderRepository = ContextWrapper.getContext().getBean(OrderRepository.class);
             orderRepository.save(order);
+            Session.getClient().addOrder(order);
         } catch (OrderEmptyFieldException e) {
             generateAlert(pane, "Błąd zamówienia!");
+            throw new IllegalStateException();
+        } catch (SessionNotSet ex) {
             throw new IllegalStateException();
         }
         Worker.newTask(new LoadPane(pane, "/fxml/order_created.fxml"));

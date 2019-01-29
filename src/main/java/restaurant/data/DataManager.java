@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import restaurant.database.*;
 import restaurant.exception.ClassIsNotEntityException;
+import restaurant.exception.OrderEmptyFieldException;
+import restaurant.misc.Builder;
 import restaurant.misc.Password;
 import restaurant.misc.Storage;
 import restaurant.model.*;
@@ -24,6 +26,40 @@ public class DataManager {
     @Autowired
     public DataManager(ApplicationContext context) {
         this.context = context;
+    }
+
+    public void generateFinishedOrders() {
+        ClientRepository clientRepository = context.getBean(ClientRepository.class);
+        ProductRepository productRepository = context.getBean(ProductRepository.class);
+        OrderRepository orderRepository = context.getBean(OrderRepository.class);
+        List<Client> clients = clientRepository.findAll();
+        for (Client client : clients) {
+            for (int i = 0; i < 5; i++) {
+
+                if (random.nextBoolean()) {
+                    Builder.getBuilder().newOrder(Order.Type.DELIVERY);
+                    Builder.getBuilder().addDeliveryAddress(client.getAddress());
+                } else {
+                    Builder.getBuilder().newOrder(Order.Type.RESTAURANT);
+                }
+
+                for (int j = 0; j < (random.nextInt(5) + 1); j++) {
+                    Builder.getBuilder().addProduct(productRepository.getOne((long) (random.nextInt(dummyProduct.length) + 1)));
+                }
+
+                Builder.getBuilder().completeOnlinePayment();
+                try {
+                    Order order = Builder.getBuilder().build();
+                    order.setStatus(Order.Status.ZREALIZOWANE);
+                    order.setClientList(Arrays.asList(client));
+                    client.addOrder(order);
+                    orderRepository.save(order);
+                } catch (OrderEmptyFieldException e) {
+                    throw new IllegalStateException();
+                }
+
+            }
+        }
     }
 
     public void loadStorage() {

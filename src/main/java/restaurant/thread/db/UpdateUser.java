@@ -42,6 +42,12 @@ public class UpdateUser implements Runnable {
         try {
             Long addressId;
             Address address = new Address(city, street, number);
+
+            if (Session.getClient().getAddress().equals(address)) {
+                Worker.newTask(new LoadPane(pane, "/fxml/dashboard.fxml"));
+                return;
+            }
+
             if ((addressId = addressRepository.findId(city, street, number)) == null) {
                 addressRepository.save(address);
                addressId = address.getId();

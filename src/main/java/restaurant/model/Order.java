@@ -60,23 +60,27 @@ public class Order implements Cloneable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
     @ManyToMany
-    @JoinTable(name = "orders_product_list", joinColumns = {@JoinColumn(name = "order_id", referencedColumnName = "id")},
-                inverseJoinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "id")})
+    @JoinTable(name = "orders_product_list",
+            joinColumns = {@JoinColumn(name = "order_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "id")})
         private List<Product> productList = new ArrayList<>();
     @Enumerated(EnumType.STRING)
         private Status status;
     @Enumerated(EnumType.STRING)
         private Type type;
-    @ManyToMany(mappedBy = "orderList")
-        private List<Client> clientList;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @ManyToMany
+    @JoinTable(name = "clientList",
+            joinColumns = {@JoinColumn(name = "client_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "order_id", referencedColumnName = "id")})
+    private List<Client> clientList;
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "purchase_id")
         private PurchaseProof purchaseProof = new PurchaseProof();
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
         private Address deliveryAddress;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
         private Reservation table;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_order")
         private Employee employee;
     private boolean payment = false;

@@ -1,10 +1,10 @@
 package restaurant.controller;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import restaurant.misc.Session;
@@ -30,7 +30,7 @@ public class DraggableWindow implements Initializable {
         System.exit(0);
     }
 
-    protected void setDraggingEvents() {
+    void setDraggingEvents() {
         pane.setOnMousePressed(event -> {
             x = pane.getScene().getWindow().getX() - event.getScreenX();
             y = pane.getScene().getWindow().getY() - event.getScreenY();
@@ -47,10 +47,11 @@ public class DraggableWindow implements Initializable {
         alert.setContentText(msg);
         alert.setHeaderText(null);
         alert.setGraphic(null);
+        pane.getScene().setFill(Color.TRANSPARENT);
         alert.setX(pane.getScene().getWindow().getX() + (pane.getScene().getWindow().getWidth() / 2.0) - (alert.getDialogPane().getWidth() / 2.0));
         alert.setY(pane.getScene().getWindow().getY() + (pane.getScene().getWindow().getHeight() / 2.0) - (alert.getDialogPane().getHeight() / 2.0) - 72.0);
         alert.getDialogPane().getStylesheets().add(DraggableWindow.class.getResource("/styles/style.css").toString());
-        ((Stage) alert.getDialogPane().getScene().getWindow()).initStyle(StageStyle.UNDECORATED);
+        ((Stage) alert.getDialogPane().getScene().getWindow()).initStyle(StageStyle.TRANSPARENT);
         alert.show();
     }
 

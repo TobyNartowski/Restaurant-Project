@@ -62,8 +62,9 @@
 
 .alert {
     -fx-background-color: #e8e8e8;
-    -fx-border-radius: 6;
-    -fx-background-radius: 6;
+    -fx-font-size: 12;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
 }
 
 .menu-button .glyph-icon {
@@ -110,7 +111,8 @@
 .order-item {
     -fx-background-color: #e8e8e8;
     -fx-background-radius: 36;
-    -fx-border-radius: 36
+    -fx-border-radius: 36;
+    -fx-padding: 10;
 }
 
 .order-product-name {
@@ -131,4 +133,8 @@
 .order-product-count {
     -fx-text-fill: #a0a0a0;
     -fx-font-size: 16px;
+}
+
+.order-product-header {
+    -fx-label-padding: 10 0 0 20;
 }
