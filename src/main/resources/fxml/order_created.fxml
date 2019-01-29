@@ -14,6 +14,6 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <Button layoutX="463.0" layoutY="335.0" mnemonicParsing="false" onMouseReleased="#onNextClick" prefHeight="25.0" prefWidth="354.0" text="Powróć do głównego menu" />
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="463.0" layoutY="335.0" mnemonicParsing="false" onMouseReleased="#onNextClick" prefHeight="25.0" prefWidth="354.0" text="Powróć do głównego menu" />
    </children>
 </AnchorPane>

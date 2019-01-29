@@ -26,6 +26,11 @@ public class Dashboard extends DraggableWindow {
     }
 
     @FXML
+    private void onSettingsClick() {
+        Worker.newTask(new LoadPane(pane, "/fxml/settings.fxml"));
+    }
+
+    @FXML
     private void logOut() {
         Session.logOut();
         Worker.newTask(new LoadWindow(pane, "Restauracja", "/fxml/start.fxml", SMALL_WINDOW_WIDTH, SMALL_WINDOW_HEIGHT));
