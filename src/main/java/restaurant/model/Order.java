@@ -59,7 +59,9 @@ public class Order implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
-    @ElementCollection
+    @ManyToMany
+    @JoinTable(name = "orders_product_list", joinColumns = {@JoinColumn(name = "order_id", referencedColumnName = "id")},
+                inverseJoinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "id")})
         private List<Product> productList = new ArrayList<>();
     @Enumerated(EnumType.STRING)
         private Status status;
