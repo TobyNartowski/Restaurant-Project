@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import restaurant.exception.SessionNotSet;
 import restaurant.misc.Session;
+import restaurant.model.Order;
 import restaurant.thread.Worker;
 import restaurant.thread.fx.LoadPane;
 import restaurant.thread.fx.LoadWindow;
@@ -29,10 +30,39 @@ public class Dashboard extends DraggableWindow {
     @FXML
     private void onHistoryClick() {
         try {
-            if (Session.getClient().getOrderList().isEmpty()) {
+            boolean orderFound = false;
+
+            for (Order order : Session.getClient().getOrderList()) {
+                if (order.getStatus() == Order.Status.ZREALIZOWANE) {
+                    orderFound = true;
+                }
+            }
+
+            if (!orderFound) {
                  Platform.runLater(() -> generateAlert(pane, "Brak zamówień!"));
             } else {
                 Worker.newTask(new LoadPane(pane, "/fxml/history.fxml"));
+            }
+        } catch (SessionNotSet sessionNotSet) {
+            sessionNotSet.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void currentOrderClick() {
+        try {
+            boolean orderFound = false;
+
+            for (Order order : Session.getClient().getOrderList()) {
+                if (order.getStatus() != Order.Status.ZREALIZOWANE) {
+                    orderFound = true;
+                }
+            }
+
+            if (!orderFound) {
+                Platform.runLater(() -> generateAlert(pane, "Brak zamówień!"));
+            } else {
+                Worker.newTask(new LoadPane(pane, "/fxml/current_order.fxml"));
             }
         } catch (SessionNotSet sessionNotSet) {
             sessionNotSet.printStackTrace();

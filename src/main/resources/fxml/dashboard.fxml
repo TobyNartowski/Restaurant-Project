@@ -44,7 +44,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="96.0" style="-fx-background-color: none;" styleClass="menu-button">
                <children>
-                  <StackPane prefHeight="188.0" styleClass="menu-button-pane">
+                  <StackPane onMouseReleased="#currentOrderClick" prefHeight="188.0" styleClass="menu-button-pane">
                      <children>
                         <FontAwesomeIconView glyphName="CARET_DOWN" size="96" textAlignment="CENTER" wrappingWidth="188.57142639160156" />
                      </children>
