@@ -5,13 +5,11 @@ import java.util.Date;
 
 @Entity
 public class Reservation {
-    //TODO: czy client potrzebny
     @Id
     @GeneratedValue
         private Long id;
     @OneToOne(mappedBy = "reservation")
         private Client bookkeeper;
-//    @Column() set max value
     private int tableNumber;
     private Date date;
     private int numberOfPeople;

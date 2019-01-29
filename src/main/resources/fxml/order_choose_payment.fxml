@@ -3,11 +3,51 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="pane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="restaurant.controller.OrderChoosePayment">
    <children>
       <FontAwesomeIconView glyphName="TIMES" layoutX="1228.0" layoutY="55.0" onMouseReleased="#onExitClick" size="48" styleClass="clickable" />
       <FontAwesomeIconView glyphName="ARROW_LEFT" layoutX="14.0" layoutY="53.0" onMouseReleased="#onBackClick" size="42" styleClass="clickable" />
-      <Label layoutX="617.0" layoutY="352.0" text="payment" />
+      <Label layoutX="459.0" layoutY="183.0" text="Wybierz sposób płatności">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="160.0" layoutY="264.0" prefHeight="240.0" prefWidth="960.0" spacing="40.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="96.0" style="-fx-background-color: none;" styleClass="menu-button">
+               <children>
+                  <StackPane onMouseReleased="#onOnlinePaymentClick" prefHeight="188.0" styleClass="menu-button-pane">
+                     <children>
+                        <FontAwesomeIconView glyphName="GLOBE" size="96" textAlignment="CENTER" wrappingWidth="188.57142639160156" />
+                     </children>
+                  </StackPane>
+                  <Label alignment="CENTER" prefHeight="55.0" prefWidth="189.0" text="PRZELEW ONLINE" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="96.0" style="-fx-background-color: none;" styleClass="menu-button">
+               <children>
+                  <StackPane onMouseReleased="#onLocalPaymentClick" prefHeight="188.0" styleClass="menu-button-pane">
+                     <children>
+                        <FontAwesomeIconView glyphName="MONEY" size="96" textAlignment="CENTER" wrappingWidth="188.57142639160156" />
+                     </children>
+                  </StackPane>
+                  <Label fx:id="cashLabel" alignment="CENTER" prefHeight="55.0" prefWidth="189.0" text="PRZY ODBIORZE" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

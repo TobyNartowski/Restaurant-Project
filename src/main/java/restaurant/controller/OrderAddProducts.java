@@ -53,12 +53,10 @@ public class OrderAddProducts extends DraggableWindow {
         productCount.setText(Long.toString(productCounterArray[Math.toIntExact(productId - 1)]));
         totalLabel.setText("TWOJE ZAMÓWIENIE: " + Builder.getBuilder().getOrderTotal());
 
-        System.out.println("Update: " + emptyCounter);
         if (emptyCounter == 0) {
             nextButton.setDisable(true);
             nextButton.getStyleClass().add("clickable-disabled");
         } else {
-            System.out.println("Enabling: " + emptyCounter);
             nextButton.setDisable(false);
             nextButton.getStyleClass().remove("clickable-disabled");
         }

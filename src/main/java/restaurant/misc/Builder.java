@@ -63,6 +63,10 @@ public class Builder {
         order.setTable(table);
     }
 
+    public void completeOnlinePayment() {
+        order.completePayment();
+    }
+
     public String getOrderTotal() {
         return Money.convertToString(order.getTotal());
     }
