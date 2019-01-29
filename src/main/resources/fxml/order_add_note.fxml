@@ -3,6 +3,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -12,28 +13,32 @@
    <children>
       <FontAwesomeIconView glyphName="TIMES" layoutX="1228.0" layoutY="55.0" onMouseReleased="#onExitClick" size="48" styleClass="clickable" />
       <FontAwesomeIconView glyphName="ARROW_LEFT" layoutX="14.0" layoutY="53.0" onMouseReleased="#onBackClick" size="42" styleClass="clickable" />
-      <Label layoutX="482.0" layoutY="110.0" text="Oto twoje zamówienie">
+      <Label layoutX="482.0" layoutY="97.0" text="Oto twoje zamówienie">
          <font>
             <Font size="32.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="463.0" layoutY="157.0" prefHeight="25.0" prefWidth="354.0" text="Sprawdź, czy wszystko się zgadza" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="463.0" layoutY="144.0" prefHeight="25.0" prefWidth="354.0" text="Sprawdź, czy wszystko się zgadza" textAlignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
       <HBox alignment="TOP_CENTER" layoutX="83.0" layoutY="189.0" prefHeight="428.0" prefWidth="1114.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="557.0">
-               <children>
-                  <Label style="-fx-text-fill: #a0a0a0;" text="Produkty">
-                     <font>
-                        <Font size="32.0" />
-                     </font>
-                  </Label>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="557.0">
+            <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="560.0" vbarPolicy="NEVER">
+               <content>
+                  <VBox fx:id="productPane" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="557.0" spacing="12.0">
+                     <children>
+                        <Label style="-fx-text-fill: #a0a0a0;" text="Produkty">
+                           <font>
+                              <Font size="32.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <VBox fx:id="attributePane" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="557.0" spacing="12.0">
                <children>
                   <Label style="-fx-text-fill: #a0a0a0;" text="Preferencje zamówienia">
                      <font>
@@ -44,6 +49,6 @@
             </VBox>
          </children>
       </HBox>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="557.0" layoutY="629.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="166.0" text="Zgadza się, złóż zamówienie" />
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="524.0" layoutY="656.0" mnemonicParsing="false" onMouseReleased="#onNextClick" prefHeight="25.0" prefWidth="233.0" text="Zgadza się, złóż zamówienie" />
    </children>
 </AnchorPane>

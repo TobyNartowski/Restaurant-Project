@@ -62,58 +62,58 @@ public class OrderAddProducts extends DraggableWindow {
         }
     }
 
-    private void showProduct(Product product) {
-        HBox productContainer = new HBox();
-        productContainer.setAlignment(Pos.CENTER_LEFT);
-        productContainer.getStyleClass().add("order-item");
-        productContainer.setPrefWidth(200.0);
-        productContainer.setPrefHeight(64.0);
-        productContainer.setSpacing(24.0);
+        private void showProduct(Product product) {
+            HBox productContainer = new HBox();
+            productContainer.setAlignment(Pos.CENTER_LEFT);
+            productContainer.getStyleClass().add("order-item");
+            productContainer.setPrefWidth(200.0);
+            productContainer.setPrefHeight(64.0);
+            productContainer.setSpacing(24.0);
 
-        Label productName = new Label(product.getName());
-        productName.setPrefWidth(312.0);
-        HBox.setMargin(productName, new Insets(0, 0, 0, 20));
-        productName.getStyleClass().add("order-product-name");
+            Label productName = new Label(product.getName());
+            productName.setPrefWidth(312.0);
+            HBox.setMargin(productName, new Insets(0, 0, 0, 20));
+            productName.getStyleClass().add("order-product-name");
 
-        Label productDescription = new Label(product.getDescription());
-        productDescription.setPrefWidth(396.0);
-        productDescription.getStyleClass().add("order-product-description");
+            Label productDescription = new Label(product.getDescription());
+            productDescription.setPrefWidth(396.0);
+            productDescription.getStyleClass().add("order-product-description");
 
-        Label productPrice = new Label(Money.convertToString(product.getPrice()));
-        productPrice.setPrefWidth(100.0);
-        productPrice.getStyleClass().add("order-product-price");
+            Label productPrice = new Label(Money.convertToString(product.getPrice()));
+            productPrice.setPrefWidth(100.0);
+            productPrice.getStyleClass().add("order-product-price");
 
-        Label productCount = new Label(Long.toString(productCounterArray[Math.toIntExact(product.getId() - 1)]));
-        productCount.setPrefWidth(20.0);
-        productCount.getStyleClass().add("order-product-count");
+            Label productCount = new Label(Long.toString(productCounterArray[Math.toIntExact(product.getId() - 1)]));
+            productCount.setPrefWidth(20.0);
+            productCount.getStyleClass().add("order-product-count");
 
-        FontAwesomeIconView productPlus = new FontAwesomeIconView(FontAwesomeIcon.PLUS);
-        productPlus.setGlyphSize(32.0);
-        productPlus.getStyleClass().add("clickable");
+            FontAwesomeIconView productPlus = new FontAwesomeIconView(FontAwesomeIcon.PLUS);
+            productPlus.setGlyphSize(32.0);
+            productPlus.getStyleClass().add("clickable");
 
-        FontAwesomeIconView productMinus = new FontAwesomeIconView(FontAwesomeIcon.MINUS);
-        productMinus.setGlyphSize(32.0);
-        productMinus.setDisable(true);
-        productMinus.getStyleClass().add("clickable");
-        productMinus.getStyleClass().add("clickable-disabled");
+            FontAwesomeIconView productMinus = new FontAwesomeIconView(FontAwesomeIcon.MINUS);
+            productMinus.setGlyphSize(32.0);
+            productMinus.setDisable(true);
+            productMinus.getStyleClass().add("clickable");
+            productMinus.getStyleClass().add("clickable-disabled");
 
-        long alreadyAddedCount = Builder.getBuilder().getProductList().stream().filter(i -> i.getId().equals(product.getId())).count();
-        for (int i = 0; i < alreadyAddedCount; i++) {
-            productCounterArray[Math.toIntExact(product.getId() - 1)]++;
-            emptyCounter++;
-            productMinus.setDisable(false);
-            productMinus.getStyleClass().remove("clickable-disabled");
-        }
-        updateProductStatus(productCount, product.getId());
-
-        productPlus.setOnMouseReleased((MouseEvent) -> {
-            Builder.getBuilder().addProduct(product);
-            productCounterArray[Math.toIntExact(product.getId() - 1)]++;
-            emptyCounter++;
+            long alreadyAddedCount = Builder.getBuilder().getProductList().stream().filter(i -> i.getId().equals(product.getId())).count();
+            for (int i = 0; i < alreadyAddedCount; i++) {
+                productCounterArray[Math.toIntExact(product.getId() - 1)]++;
+                emptyCounter++;
+                productMinus.setDisable(false);
+                productMinus.getStyleClass().remove("clickable-disabled");
+            }
             updateProductStatus(productCount, product.getId());
-            productMinus.setDisable(false);
-            productMinus.getStyleClass().remove("clickable-disabled");
-        });
+
+            productPlus.setOnMouseReleased((MouseEvent) -> {
+                Builder.getBuilder().addProduct(product);
+                productCounterArray[Math.toIntExact(product.getId() - 1)]++;
+                emptyCounter++;
+                updateProductStatus(productCount, product.getId());
+                productMinus.setDisable(false);
+                productMinus.getStyleClass().remove("clickable-disabled");
+            });
 
         productMinus.setOnMouseReleased((MouseEvent) -> {
             Builder.getBuilder().removeProduct(product.getId());

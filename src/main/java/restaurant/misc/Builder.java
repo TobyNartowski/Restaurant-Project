@@ -67,6 +67,10 @@ public class Builder {
         order.completePayment();
     }
 
+    public boolean isPaymentComplete() {
+        return order.getPayment();
+    }
+
     public String getOrderTotal() {
         return Money.convertToString(order.getTotal());
     }

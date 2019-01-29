@@ -49,5 +49,6 @@
             </VBox>
          </children>
       </HBox>
+      <Label layoutX="453.0" layoutY="689.0" style="-fx-text-fill: #a0a0a0;" text="W prawdziwej aplikacji, nastąpiłoby przekierowanie do płatności online" />
    </children>
 </AnchorPane>
