@@ -13,12 +13,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import restaurant.controller.DraggableWindow;
 import restaurant.data.DataManager;
+import restaurant.data.OrderAdder;
 import restaurant.database.ClientRepository;
 import restaurant.exception.ClassIsNotEntityException;
 import restaurant.misc.ContextWrapper;
 import restaurant.misc.Session;
 import restaurant.misc.Storage;
 import restaurant.model.Client;
+import restaurant.model.Employee;
 import restaurant.model.Ingredient;
 import restaurant.model.Product;
 
@@ -28,7 +30,8 @@ public class RestaurantApplication extends Application {
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx = SpringApplication.run(RestaurantApplication.class, args);
         ContextWrapper.initWrapper(ctx);
-        launch(args);
+
+        //launch(args);
         ctx.close();
     }
 
