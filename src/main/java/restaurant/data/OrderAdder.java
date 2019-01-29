@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import restaurant.database.*;
 import restaurant.exception.EmptyClassException;
+import restaurant.misc.Builder;
 import restaurant.misc.Storage;
 import restaurant.model.*;
 
 import java.util.*;
 
-public class AddOrder {
+public class OrderAdder {
     private ApplicationContext ctx;
     private Client client;
     private ClientRepository clientRepository;
@@ -27,7 +28,7 @@ public class AddOrder {
     private List<String> productNames = new LinkedList<>();
 
     @Autowired
-    public AddOrder(ApplicationContext ctx) {
+    public OrderAdder(ApplicationContext ctx) {
         this.ctx = ctx;
         this.clientRepository = ctx.getBean(ClientRepository.class);
         this.employeeRepository = ctx.getBean(EmployeeRepository.class);
@@ -79,10 +80,6 @@ public class AddOrder {
         employee = employeeRepository.getOne(id);
     }
 
-    //do naprawy bo juz kurwa nie mam sily
-    public void setEmployee(Employee.Type type) {
-        //employee = employeeRepository.getEmployeeByType(type);
-    }
 
     public void setAddress(Long id) {
         address = addressRepository.getOne(id);
@@ -104,7 +101,6 @@ public class AddOrder {
     }
 
     public void addProduct(String productName) {
-        //lista bo sie jebie
         productNames.add(productName);
         List<Product> products = productRepository.findAll();
         for (int i = 0; i < products.size(); i++) {
@@ -114,6 +110,16 @@ public class AddOrder {
 //                }
             }
         }
+    }
+
+    public void addBuilder(Order builder) {
+        productList = builder.getProductList();
+        setAddress(builder.getDeliveryAddress().getId());
+        order.setType(builder.getType());
+
+        if(builder.getPayment() == true)
+            order.completePayment();
+
     }
 
     public void addOrder() throws EmptyClassException {
