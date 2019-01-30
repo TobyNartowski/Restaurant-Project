@@ -257,13 +257,13 @@ public class DataManager {
             )),
             new Product("Orange juice(fresh) 1l", 250, Arrays.asList(
                     getIngredient("Water"), getIngredient("Orange")
-            )),
-            new Product("Pepsi 0.7l", 350, Arrays.asList()),
-            new Product("Ice tea green 0.5l", 450, Arrays.asList()),
-            new Product("Ice tea lemon 0.5l", 450, Arrays.asList()),
-            new Product("Pepsi 1l", 550, Arrays.asList()),
-            new Product("Mirinda 1l", 550, Arrays.asList()),
-            new Product("Apple juice 1l", 350, Arrays.asList())
+            ), false),
+            new Product("Pepsi 0.7l", 350, Arrays.asList(), false),
+            new Product("Ice tea green 0.5l", 450, Arrays.asList(), false),
+            new Product("Ice tea lemon 0.5l", 450, Arrays.asList(), false),
+            new Product("Pepsi 1l", 550, Arrays.asList(), false),
+            new Product("Mirinda 1l", 550, Arrays.asList(), false),
+            new Product("Apple juice 1l", 350, Arrays.asList(), false)
     };
 
     @Dummy(dependency = {Address.class})

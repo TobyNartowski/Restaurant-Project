@@ -15,6 +15,7 @@ public class Product {
     protected List<Ingredient> ingredientList = new ArrayList<>();
     protected String name;
     protected long price;
+    private boolean decorable = true;
 
     public Product() {}
 
@@ -23,6 +24,13 @@ public class Product {
         this.price = price;
         this.ingredientList = ingredientList;
     }
+    public Product(String name, long price, List<Ingredient> ingredientList, boolean decorable) {
+        this.name = name;
+        this.price = price;
+        this.ingredientList = ingredientList;
+        this.decorable = decorable;
+    }
+
 
     public Long getId() {
         return id;
@@ -44,7 +52,7 @@ public class Product {
         this.price = price;
     }
 
-    public void setListaSkladnikow(List<Ingredient> ingredientList) {
+    public void setIngredientList(List<Ingredient> ingredientList) {
         this.ingredientList = ingredientList;
     }
 
@@ -62,6 +70,20 @@ public class Product {
 
     public boolean removeIngredient(Ingredient ingredient) {
         return ingredientList.remove(ingredient);
+    }
+
+    public boolean isDecorable() {
+        return decorable;
+    }
+
+    public void setDecorable(boolean decorable) {
+        this.decorable = decorable;
+    }
+
+    public void copy(Product diff) {
+        name = diff.getName();
+        ingredientList = diff.getIngredientList();
+        price = diff.getPrice();
     }
 
     public String getDescription() {

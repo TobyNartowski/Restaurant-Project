@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="pane" prefHeight="480.0" prefWidth="720.0" styleClass="decorator-window" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="restaurant.controller.Decorator">
+   <children>
+      <FontAwesomeIconView glyphName="TIMES" layoutX="668.0" layoutY="55.0" onMouseReleased="#onExitClick" size="48" styleClass="clickable" />
+      <Label fx:id="headerLabel" layoutX="56.0" layoutY="80.0" prefHeight="47.0" prefWidth="609.0" text="Dodaj składniki do Produkt">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <ScrollPane hbarPolicy="NEVER" layoutX="56.0" layoutY="137.0" prefHeight="296.0" prefWidth="609.0" vbarPolicy="NEVER">
+         <content>
+            <VBox fx:id="ingredientsContainer" prefHeight="313.0" prefWidth="605.0" spacing="12.0" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

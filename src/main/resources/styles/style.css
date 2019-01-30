@@ -27,6 +27,21 @@
     -fx-text-fill: #9bff7e;
 }
 
+.decorator {
+    -fx-fill: #a0a0a0;
+    -fx-text-fill: #a0a0a0;
+}
+
+.decorator-window {
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+}
+
+.decorator:hover {
+    -fx-fill: #4ef442;
+    -fx-text-fill: #4ef442;
+}
+
 .clickable-disabled {
     -fx-fill: #a0a0a0;
     -fx-text-fill: #a0a0a0;
