@@ -1,6 +1,10 @@
 package restaurant.misc;
 
+import restaurant.model.Order;
+
 public abstract class MediatorPerson {
+
+    protected Order.Status status;
 
     protected Mediator mediator;
 
@@ -8,5 +12,5 @@ public abstract class MediatorPerson {
         this.mediator = mediator;
     }
 
-    public abstract void updateStatus();
+    public abstract Order.Status updateStatus();
 }

@@ -1,9 +1,11 @@
 package restaurant.misc;
 
+import restaurant.model.Order;
+
 import java.util.HashSet;
 
 public class Mediator {
-
+    
     private HashSet<MediatorPerson> persons = new HashSet<>();
 
     public void register(MediatorPerson person) {
